@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>I'll show you how to cook (A2–B1)</title>
+<style>
+:root{--bg:#FFF6EC;--paper:#fff;--ink:#3B2314;--muted:#7A5C48;--line:#F0DCC8;--main:#D9531E;--main2:#F2894B;--soft:#FFE6D3;--green:#2E8B57;--greenSoft:#DDF3E6;--bad:#D23B2A;--badSoft:#FBE1DD;--sun:#FFC24B;--sunSoft:#FFF1CF}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:860px;margin:0 auto;padding:14px}
+.hero{background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;border-radius:18px;padding:18px 20px;margin-bottom:12px}
+.hero h1{margin:0 0 4px;font-size:22px}.hero p{margin:0;opacity:.95;font-size:14px}
+.tabs{display:flex;gap:6px;overflow-x:auto;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:5}
+.tab{flex:0 0 auto;border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 14px;font-weight:600;font-size:14px}
+.tab[aria-selected=true]{background:var(--main);border-color:var(--main);color:#fff}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:12px 0}
+.card h2{margin:0 0 6px;font-size:19px}.card h3{margin:0 0 6px;font-size:16px}
+.hint{color:var(--muted);font-size:14px;margin:4px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.b{border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:8px 14px;font-weight:600}
+.b.primary{background:var(--main);border-color:var(--main);color:#fff}
+.b.red{background:var(--bad);border-color:var(--bad);color:#fff}
+.b:disabled{opacity:.45;cursor:not-allowed}
+.seg .b[aria-pressed=true]{background:var(--soft);border-color:var(--main)}
+.fcard{min-height:220px;border:3px solid var(--main2);border-radius:20px;background:var(--paper);padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none}
+.fcard.back{background:var(--sunSoft);border-color:var(--sun)}
+.fcard .tag{font-size:12px;font-weight:700;color:var(--main);background:var(--soft);border-radius:999px;padding:2px 10px;margin-bottom:10px}
+.fcard .big{font-size:27px;font-weight:800;line-height:1.25}
+.fcard .note{margin-top:8px;font-size:14px;color:var(--muted)}
+.fcard .ex{margin-top:10px;font-style:italic}
+.bar{height:10px;background:var(--line);border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:var(--main2);width:0}
+.q{border:2px solid var(--line);border-radius:14px;padding:12px;margin:10px 0;background:var(--paper)}
+.q.right{border-color:var(--green);background:var(--greenSoft)}.q.wrong{border-color:var(--bad);background:var(--badSoft)}
+.qt{font-weight:600;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 12px;margin:6px 0}
+.opt.ok{border-color:var(--green);background:var(--greenSoft)}.opt.no{border-color:var(--bad);background:var(--badSoft)}
+.expl{font-size:14px;color:var(--muted);margin-top:6px}
+.lv{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 9px;margin-right:6px;background:var(--soft);color:var(--main)}
+.seq{border-left:6px solid var(--main2);padding:8px 12px;margin:10px 0;background:#fffaf5;border-radius:0 12px 12px 0}
+.seq.b1{border-color:var(--sun)}.seq.b2{border-color:var(--green)}
+.seq .it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-top:1px dashed var(--line)}
+.step{display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:9px 12px;margin:6px 0}
+.slot{display:flex;gap:8px;align-items:flex-start;border:2px solid var(--green);background:var(--greenSoft);border-radius:12px;padding:8px 12px;margin:6px 0}
+.slot.badpos{border-color:var(--bad);background:var(--badSoft)}
+.slot .n{font-weight:800}
+textarea,input[type=text]{width:100%;border:2px solid var(--line);border-radius:12px;padding:9px 12px;font:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+.tip{background:var(--sunSoft);border-radius:12px;padding:8px 12px;font-size:14px;margin:8px 0}
+.warn{background:var(--badSoft);border-radius:12px;padding:8px 12px;margin:8px 0}
+.okbox{background:var(--greenSoft);border-radius:12px;padding:8px 12px;margin:8px 0}
+.score{display:inline-block;border-radius:999px;padding:1px 10px;font-weight:700;font-size:14px;margin-right:6px}
+.score.hi{background:var(--greenSoft);color:var(--green)}.score.mid{background:var(--sunSoft);color:#8a5a00}.score.lo{background:var(--badSoft);color:var(--bad)}
+.diff span.m{color:var(--bad);font-weight:700;text-decoration:underline}.diff span.o{color:var(--green);font-weight:600}
+.sect{margin:10px 0}
+.sent{display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:10px;border:1px solid var(--line);margin:5px 0;background:#fff}
+.sent.hl{background:var(--sunSoft);border-color:var(--sun)}
+.sent span.t{flex:1}
+.issue{border-left:5px solid var(--bad);background:#fff8f6;border-radius:0 10px 10px 0;padding:6px 10px;margin:6px 0;font-size:15px}
+.issue q{color:var(--bad)}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;font-size:14px;vertical-align:top}
+#gate{position:fixed;inset:0;background:rgba(59,35,20,.6);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+[hidden]{display:none!important}
+.panel.locked>.card:not(.lockcard){display:none}
+.remind{background:var(--sunSoft);border:2px dashed var(--sun);border-radius:12px;padding:8px 12px;margin:8px 0;font-size:15px}
+.gbox{background:#fff;border-radius:18px;padding:22px;max-width:380px;width:100%;text-align:center}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 16px;border-radius:12px;z-index:60;max-width:90%;font-size:14px}
+.gridc{display:grid;grid-template-columns:repeat(auto-fill,minmax(30px,1fr));gap:4px;margin:8px 0}.gc{border:1px solid var(--line);border-radius:8px;text-align:center;font-size:10px;padding:1px 0;color:var(--muted);background:#fff}.gc.l0,.gc.l1,.gc.l2{background:var(--sunSoft);border-color:var(--sun)}.gc.k{background:var(--green);border-color:var(--green);color:#fff}
+.wcard{border:3px solid var(--main2);border-radius:18px;padding:14px;background:#fffaf5;text-align:center}.wcard .tag{display:inline-block;font-size:12px;font-weight:700;color:var(--main);background:var(--soft);border-radius:999px;padding:2px 10px}
+.wen{font-size:26px;font-weight:800}.wvi{font-size:22px;font-weight:700;color:var(--main);margin:4px 0}.wex{font-style:italic;margin-top:6px}
+.flowbox{margin:10px 0}.wl{margin-top:12px}.wrow{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px dashed var(--line)}.pips{letter-spacing:2px;color:var(--main)}
+</style>
+</head>
+<body>
+<div id="gate"><div class="gbox"><div style="font-size:44px">🍳</div><h2>Welcome!</h2><p>Please type your name to start.</p><input type="text" id="gateName" placeholder="Your full name" autocomplete="name"><p></p><button class="b primary" id="gateGo">Start learning</button></div></div>
+
+<div class="wrap">
+  <div class="hero"><h1>🍳 I'll show you how to cook</h1><p>Cooking words and phrases · Sequence words · Make a recording about fried spring rolls</p></div>
+  <div class="tabs" role="tablist">
+    <button class="tab" data-p="p1" aria-selected="true">1 Learn phrases</button>
+    <button class="tab" data-p="p3" aria-selected="false">2 Sequence words</button>
+    <button class="tab" data-p="p4" aria-selected="false">3 Fried egg</button>
+    <button class="tab" data-p="p5" aria-selected="false">4 Spring rolls</button>
+    <button class="tab" data-p="p6" aria-selected="false">📨 Submit</button>
+  </div>
+
+  <section class="panel on" id="p1">
+    <div class="card">
+      <h2>Learn cooking phrases</h2>
+      <p class="hint">New phrases appear one at a time with the IPA and the Vietnamese meaning. After you have seen a phrase, it comes back in short questions: meaning, listening and typing. Answer a phrase correctly 3 times to master it. Wrong answers come back sooner.</p>
+      <div id="flow"></div>
+      <div class="row" style="margin-top:10px"><button class="b" id="restart">↺ Start again</button></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p3">
+    <div class="card">
+      <h2>Sequence words</h2>
+      <p class="hint">From basic to advanced. Tap 🔊 to hear each example.</p>
+      <div id="seqBox"></div>
+      <div class="tip"><b>Signs that show when to go to the next step:</b><br>
+      the onion <b>turns golden</b> · the shrimp <b>turns pink</b> · the onion <b>becomes soft / transparent</b> · the noodles <b>are soft</b> · the garlic <b>smells good</b> · the sauce <b>becomes thick</b></div>
+    </div>
+    <div class="card">
+      <h2>Choose the best word</h2>
+      <div id="sqScore" class="row"></div>
+      <div id="sqBox"></div>
+      <button class="b" id="sqRedo">↺ Try again</button>
+    </div>
+  </section>
+
+  <section class="panel" id="p4">
+    <div class="card lockcard" id="lock_p4" hidden></div>
+    <div class="card">
+      <h2>Put the fried egg steps in order</h2>
+      <p class="hint">Tap the steps in the correct order. Tap ↩ to put a step back.</p>
+      <div class="hint">Steps left:</div><div id="eggPool"></div>
+      <div class="hint">Your order:</div><div id="eggAns"></div>
+      <div class="row" style="margin-top:8px"><button class="b primary" id="eggCheck">Check</button><button class="b" id="eggReset">↺ Start again</button></div>
+      <div class="tip" id="eggFb" hidden></div>
+      <div id="eggFull" hidden>
+        <div class="card" style="background:#fffaf5">
+          <h3>The full text with sequence words</h3>
+          <p id="eggText"></p>
+          <button class="b primary" id="eggSay">🔊 Listen to the full text</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Now write it in your own words</h2>
+      <p class="hint">Write 4–6 sentences about how to fry an egg. Use at least 4 different sequence words (First, Next, Once, Finally…).</p>
+      <textarea id="eggMine" placeholder="First, …"></textarea>
+      <div class="tip" id="eggMineCk"></div>
+    </div>
+  </section>
+
+  <section class="panel" id="p5">
+    <div class="card lockcard" id="lock_p5" hidden></div>
+    <div class="card">
+      <h2>Information: fried spring rolls</h2>
+      <p class="hint">Use this information to write your own text. Do not copy it: write full sentences.</p>
+      <table>
+        <tr><th>Ingredients</th><td>10 sheets of rice paper · 50 g glass noodles · 200 g minced pork · 2 cloves of garlic · 2 shallots · ½ onion · a pinch of salt · 1 tablespoon of sugar · a pinch of black pepper · enough oil to fry · 1 head of lettuce · 1 bunch of coriander</td></tr>
+        <tr><th>Dipping sauce</th><td>2 tablespoons of fish sauce · 1 tablespoon of honey · the juice of half a lime · 1 red chili</td></tr>
+        <tr><th>Tools</th><td>bowl · cutting board · knife · pan · plate · spoon · pair of chopsticks · stove · paper towel</td></tr>
+        <tr><th>Steps</th><td>1 soak the glass noodles in warm water until soft, cut into small pieces · 2 chop the onion and shallots, mince the garlic · 3 mix the pork, noodles, onion, shallots and garlic in a bowl; season with salt, sugar and pepper; stir well · 4 put a spoonful of filling on rice paper, fold in the sides, roll tightly · 5 heat the oil in a pan over medium heat · 6 fry the rolls until golden brown (about 8 minutes), turn them over · 7 drain on a paper towel, put on a plate · 8 serve with lettuce, coriander and dipping sauce</td></tr>
+        <tr><th>Tip</th><td>dip the rice paper in warm water for only one second; use medium heat so the rolls do not burn</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Step 1 · Write your text</h2>
+      <p>Imagine you are making a cooking video. Write your text in three paragraphs: <b>opening</b>, <b>body</b> and <b>ending</b>.</p>
+      <div class="sect"><h3>Opening</h3><textarea data-s="0" placeholder="Hello everyone! Today I'm going to show you …"></textarea></div>
+      <div class="sect"><h3>Body</h3><textarea data-s="1" style="min-height:190px" placeholder="First, …"></textarea></div>
+      <div class="sect"><h3>Ending</h3><textarea data-s="2" placeholder="Now the food is ready to be served. …"></textarea></div>
+      <div class="tip" id="scCount"></div>
+      <div class="hint">Your goals:</div>
+      <ul id="scCheck" style="list-style:none;padding:0;margin:6px 0"></ul>
+      <div class="row"><button class="b primary" id="scSubmit">📝 Submit for feedback</button><span class="hint" id="scAtt"></span></div>
+      <div id="fbBox" hidden></div>
+      <button class="b" id="scModel" hidden>💡 Show a model text</button>
+      <div class="tip" id="scModelBox" hidden></div>
+    </div>
+
+    <div class="card" id="readCard" hidden>
+      <h2>Step 2 · Practise reading</h2>
+      <p class="hint">Listen to each sentence, then read it aloud. Tap 🔊 for the chosen speed or 🐢 for very slow. This is the text you submitted.</p>
+      <div class="row"><label class="hint">Speed
+        <select id="rate"><option value="0.6">Very slow</option><option value="0.8" selected>Slow</option><option value="1">Normal</option></select></label>
+        <button class="b primary" id="playAll">▶ Play all</button><button class="b" id="stopAll">⏹ Stop</button></div>
+      <div id="readBox"></div>
+    </div>
+
+    <div class="card" id="recCard" hidden>
+      <h2>Step 3 · Record your voice</h2>
+      <p class="hint">Read your text aloud. You can pause, stop whenever you want, listen to your recording, listen to the model reading, and record again. Send it only when you are happy.</p>
+      <div class="row">
+        <button class="b red" id="recStart">⏺ Start</button>
+        <button class="b" id="recPause" disabled>⏸ Pause</button>
+        <button class="b" id="recStop" disabled>⏹ Stop</button>
+        <span class="hint" id="recTime"></span>
+      </div>
+      <div id="recOut" hidden>
+        <p></p><audio id="recAudio" controls style="width:100%"></audio>
+        <div class="row" style="margin-top:8px">
+          <button class="b" id="modelPlay">🔊 Listen to the model</button>
+          <button class="b" id="modelStop">⏹ Stop model</button>
+          <button class="b primary" id="recSend">📤 Send my recording</button>
+          <span class="hint" id="recMsg"></span>
+        </div>
+        <div class="hint" id="recScore"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" id="p6">
+    <div class="card">
+      <h2>Submit to your teacher</h2>
+      <p>Your name: <input type="text" id="stuName" style="max-width:320px"></p>
+      <div id="sumBox"></div>
+      <button class="b primary" id="submitBtn">📨 Submit to my teacher</button>
+      <p id="submitMsg"></p>
+      <p class="warn" id="noUrl" hidden>⚙️ This page has no submission link yet.</p>
+    </div>
+  </section>
+</div>
+<div id="toast" hidden></div>
+
+<script>
+/* ===== LESSON DATA START ===== */
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwnf8X3_Xfk9F_8HQtBwSFU_s28sRjxKb0aFaHCA4ybmMJvgaztBAbdvaFzITdbVXBt/exec';
+const LESSON='cooking-spring-roll';
+
+function C(g,en,vi,ipa,note,ex,def){return {g,en,vi,ipa,note,ex,def};}
+const CARDS=[
+ C('ing','2 cloves of garlic','2 tép tỏi','/tu kloʊvz əv ˈɡɑrlɪk/','Garlic is uncountable: count it with cloves or bulbs.','Mince two cloves of garlic.','Two small pieces from a garlic bulb.'),
+ C('ing','a pinch of salt','một nhúm muối','/ə pɪntʃ əv sɔlt/','Salt is uncountable: use a pinch or a teaspoon.','Add a pinch of salt.','A very small amount of salt, held between two fingers.'),
+ C('ing','a tablespoon of sugar','một muỗng canh đường','/ə ˈteɪbəlˌspun əv ˈʃʊɡər/','A tablespoon is a big spoon; a teaspoon is a small spoon.','Add a tablespoon of sugar and stir well.','A big spoon full of sweet white crystals.'),
+ C('ing','50 grams of glass noodles','50 g miến','/ˈfɪfti ɡræmz əv ɡlæs ˈnudəlz/','Glass noodles is always plural.','Soak the glass noodles in warm water.','A weight of clear, thin noodles.'),
+ C('ing','10 sheets of rice paper','10 tờ bánh tráng','/tɛn ʃits əv raɪs ˈpeɪpər/','Rice paper is uncountable: use a sheet or a pack.','Wrap the filling in a sheet of rice paper.','Ten thin, round wrappers used for spring rolls.'),
+ C('ing','2 shallots, finely chopped','2 củ hành tím, băm nhỏ','/tu ʃəˈlɑts ˈfaɪnli tʃɑpt/','Shallots are countable. Finely chopped = in very small pieces.','Add two shallots, finely chopped.','Two small purple onions cut into very small pieces.'),
+ C('ing','2 tablespoons of fish sauce','2 muỗng canh nước mắm','/tu ˈteɪbəlˌspunz əv fɪʃ sɔs/','Tablespoons gets an s; fish sauce does not change.','Pour two tablespoons of fish sauce into the bowl.','Two big spoons of a salty brown sauce made from fish.'),
+ C('ing','200 grams of minced pork','200 g thịt heo băm','/tu ˈhʌndrəd ɡræmz əv mɪnst pɔrk/','Minced pork is uncountable: use grams. (US: ground pork)','Mix 200 grams of minced pork with the noodles.','A weight of meat that is cut into very small pieces.'),
+ C('tool','fry in a pan','chiên trong chảo','/fraɪ ɪn ə pæn/','A pan is flat; use it for frying.','Fry the egg in a pan.','Cook in hot oil in a flat metal container with a handle.'),
+ C('tool','turn on the stove','bật bếp','/tɜrn ɑn ðə stoʊv/','Turn on the stove; turn off the stove.','Turn on the stove and heat the oil.','Start the cooking heat.'),
+ C('tool','drain on a paper towel','để ráo dầu trên giấy thấm','/dreɪn ɑn ə ˈpeɪpər ˈtaʊəl/','A paper towel takes away extra oil.','Drain the rolls on a paper towel.','Put fried food on soft paper to take away extra oil.'),
+ C('verb','stir well','khuấy đều','/stɜr wɛl/','Stir = move food around with a spoon.','Stir well until the sugar melts.','Mix food with a spoon until it is all the same.'),
+ C('verb','mince the garlic','băm nhỏ tỏi','/mɪns ðə ˈɡɑrlɪk/','Minced garlic = garlic in very tiny pieces.','Mince the garlic and add it to the pork.','Cut garlic into extremely small pieces.'),
+ C('verb','roll it tightly','cuộn chặt','/roʊl ɪt ˈtaɪtli/','Tightly = with no space inside.','Roll it tightly so it does not break.','Turn the wrapper over and over so there is no space inside.'),
+ C('verb','heat the oil over medium heat','đun nóng dầu ở lửa vừa','/hit ðə ɔɪl ˈoʊvər ˈmidiəm hit/','Medium heat = not high, not low.','Heat the oil in a pan over medium heat.','Make oil hot on a middle-size flame.'),
+ C('verb','cut into small pieces','cắt thành miếng nhỏ','/kʌt ˈɪntu smɔl ˈpisɪz/','cut … into + pieces','Cut the lettuce into small pieces.','Make big food into many little parts.'),
+ C('verb','soak in warm water','ngâm trong nước ấm','/soʊk ɪn wɔrm ˈwɔtər/','Soak = leave something in water.','Soak the glass noodles in warm water.','Leave food in warm water until it is soft.'),
+ C('verb','fry until golden brown','chiên đến khi vàng nâu','/fraɪ ənˈtɪl ˈɡoʊldən braʊn/','until + a sign that shows when to stop','Fry the rolls until golden brown.','Cook in hot oil until the color is yellow-brown.'),
+ C('verb','crack an egg','đập trứng','/kræk æn ɛɡ/','Crack = break the shell.','Crack two eggs into a small bowl.','Break the shell of an egg.'),
+ C('verb','put a spoonful of filling','cho một muỗng nhân','/pʊt ə ˈspunˌfʊl əv ˈfɪlɪŋ/','A spoonful = the amount on one spoon.','Put a spoonful of filling on the rice paper.','Place one spoon of the mixture in the middle.'),
+ C('verb','fold in the sides','gấp hai mép vào','/foʊld ɪn ðə saɪdz/','Fold = bend something over.','Fold in the sides and roll it tightly.','Bend the left and right edges to the middle.'),
+ C('verb','mix the dipping sauce','pha nước chấm','/mɪks ðə ˈdɪpɪŋ sɔs/','Dipping sauce = sauce for dipping food.','Mix the dipping sauce in a small bowl.','Stir fish sauce, honey, lime and chili together.'),
+ C('tool','put on a plate','bày ra đĩa','/pʊt ɑn ə pleɪt/','A plate is flat; a bowl is deep.','Put the rolls on a plate.','Place food on a flat dish to serve it.'),
+ C('verb','chop the onion','thái / băm hành','/tʃɑp ði ˈʌnjən/','Chop = cut into small pieces with a knife.','Chop the onion roughly.','Cut an onion into small pieces with a knife.'),
+ C('verb','serve with fish sauce','dọn kèm nước mắm','/sɜrv wɪð fɪʃ sɔs/','Serve = put food on the table.','Serve the rolls with fish sauce and lettuce.','Put the food on the table together with sauce.')
+];
+const STAGES=[
+ {n:'Kitchen basics',l:['turn on the stove','fry in a pan','put on a plate','crack an egg','heat the oil over medium heat','stir well','a pinch of salt']},
+ {n:'Seasoning & sauce',l:['a tablespoon of sugar','2 tablespoons of fish sauce','2 cloves of garlic','mix the dipping sauce']},
+ {n:'The filling',l:['200 grams of minced pork','50 grams of glass noodles','2 shallots, finely chopped','mince the garlic','chop the onion','soak in warm water','cut into small pieces']},
+ {n:'Wrap, fry & serve',l:['10 sheets of rice paper','put a spoonful of filling','fold in the sides','roll it tightly','fry until golden brown','drain on a paper towel','serve with fish sauce']}
+];
+(function(){const src=CARDS.slice(),out=[];
+ STAGES.forEach((st,si)=>st.l.forEach(en=>{const c=src.find(x=>x.en===en);if(!c)throw new Error('missing card '+en);c.s=si;out.push(c);}));
+ if(out.length!==src.length)throw new Error('card order mismatch '+out.length+'/'+src.length);
+ CARDS.length=0;out.forEach((c,i)=>{c.k='c'+i;CARDS.push(c);});})();
+
+const SEQ=[
+ {lv:'A2 · Basic',cls:'',items:[
+  {en:'First, …',g:'the first step · bước đầu tiên',ex:'First, wash the vegetables.'},
+  {en:'Next, … / Then, …',g:'the step after the one before · bước tiếp theo',ex:'Next, cut the onion into small pieces.'},
+  {en:'After that, …',g:'the step after the one before · bước tiếp theo',ex:'After that, add a pinch of salt.'},
+  {en:'Finally, …',g:'the last step · bước cuối cùng',ex:'Finally, put the food on a plate.'}]},
+ {lv:'B1 · Intermediate',cls:'b1',items:[
+  {en:'Once + clause, …',g:'when one thing is finished, the next thing starts · khi việc này xong thì việc tiếp theo bắt đầu',ex:'Once the water boils, add the noodles.'},
+  {en:'When + clause, …',g:'at the moment something changes (color, soft) · khi có sự thay đổi (đổi màu, mềm)',ex:'When the onion turns golden, add the pork.'},
+  {en:'As soon as + clause, …',g:'immediately after · ngay sau khi',ex:'As soon as the garlic smells good, add the onion.'},
+  {en:'While + clause / Meanwhile, …',g:'two actions at the same time · hai việc xảy ra cùng lúc (trong khi đó)',ex:'Fry the rolls. Meanwhile, make the dipping sauce.'},
+  {en:'… until + clause',g:'up to the moment something changes · cho đến khi',ex:'Cook the noodles until they are soft.'}]},
+ {lv:'B2 · Advanced',cls:'b2',items:[
+  {en:'At that time / At that point, …',g:'at that moment · vào lúc đó',ex:'Wait for one minute. At that point, the edges turn golden.'},
+  {en:'Eventually, …',g:'in the end, after a long time · cuối cùng, sau một thời gian',ex:'Simmer for twenty minutes. Eventually, the sauce becomes thick.'},
+  {en:'The tip to make it delicious is to …',g:'a special trick for better taste · mẹo để món ngon hơn',ex:'The tip to make it delicious is to use fresh herbs.'},
+  {en:'Make sure you … / Be careful not to …',g:'advice or a warning · lời khuyên hoặc cảnh báo',ex:'Be careful not to soak the rice paper for too long.'}]}
+];
+const SQ=[
+ {id:'s1',lv:'A2',q:'______, wash the vegetables.',o:['First','Finally','Eventually'],a:0,x:'Use First for the first step.'},
+ {id:'s2',lv:'B1',q:'______ the water boils, add the noodles.',o:['Once','Meanwhile','Finally'],a:0,x:'Once + clause: when one thing is finished, do the next thing.'},
+ {id:'s3',lv:'B1',q:'______ the garlic turns golden, add the onion.',o:['As soon as','Meanwhile','Finally'],a:0,x:'As soon as = immediately after.'},
+ {id:'s4',lv:'B1',q:'Fry the rolls. ______, make the dipping sauce.',o:['Meanwhile','First','Until'],a:0,x:'Meanwhile = at the same time.'},
+ {id:'s5',lv:'B1',q:'Cook the soup ______ the vegetables are soft.',o:['until','while','finally'],a:0,x:'until = up to the moment the vegetables are soft.'},
+ {id:'s6',lv:'B2',q:'Wait for one minute. ______, the edges turn golden.',o:['At that point','First','Meanwhile'],a:0,x:'At that point / at that time = at that moment.'},
+ {id:'s7',lv:'B2',q:'Simmer the sauce for twenty minutes. ______, it becomes thick and sweet.',o:['Eventually','First','Meanwhile'],a:0,x:'Eventually = in the end, after some time.'},
+ {id:'s8',lv:'A2',q:'______, put the rolls on a plate and serve.',o:['Finally','First','Once'],a:0,x:'Finally = the last step.'},
+ {id:'s9',lv:'B2',q:'The tip to make it delicious ______ to use fresh herbs.',o:['is','are','does'],a:0,x:'The tip is to + verb. “Tip” is singular.'},
+ {id:'s10',lv:'B1',q:'When the onion turns ______, add the pork.',o:['golden','delicious','kitchen'],a:0,x:'turn + color: turns golden.'}
+];
+
+const EGG=[
+ 'Crack two eggs into a small bowl.',
+ 'Add a pinch of salt and beat the eggs well.',
+ 'Turn on the stove and heat a tablespoon of oil in a pan over medium heat.',
+ 'Once the oil is hot, pour the eggs into the pan.',
+ 'Cook for about one minute until the edges turn golden.',
+ 'Flip the egg over carefully.',
+ 'Cook for another thirty seconds.',
+ 'Turn off the stove and put the egg on a plate.'
+];
+const EGG_FULL="First, crack two eggs into a small bowl. Next, add a pinch of salt and beat the eggs well. Then, turn on the stove and heat a tablespoon of oil in a pan over medium heat. Once the oil is hot, pour the eggs into the pan. Cook for about one minute until the edges turn golden. After that, flip the egg over carefully and cook for another thirty seconds. Finally, turn off the stove and put the egg on a plate. The tip to make it delicious is to use medium heat, so the egg stays soft.";
+
+const WMIN=100,WMAX=320;
+const MODEL=[
+ "Hello everyone! Today I'm going to show you how to make fried spring rolls, a famous Vietnamese dish. They are easy to make and very healthy because they have a lot of fresh vegetables. For this recipe, we need ten sheets of rice paper, fifty grams of glass noodles, two hundred grams of minced pork, two cloves of garlic, two shallots, half an onion, a pinch of salt, a tablespoon of sugar and a pinch of black pepper. We also need a bowl, a cutting board, a knife, a pan and a pair of chopsticks.",
+ "First, soak the glass noodles in warm water until they are soft, then cut them into small pieces. Next, chop the onion and the shallots on the cutting board and mince the garlic. Then, mix the pork, noodles, onion, shallots and garlic in a big bowl. Add the salt, sugar and pepper and stir well. Once the filling is ready, put a spoonful of filling on a sheet of rice paper, fold in the sides and roll it tightly. Meanwhile, heat some oil in a pan over medium heat. As soon as the oil is hot, fry the rolls until they turn golden brown. Finally, drain the rolls on a paper towel and put them on a plate. The tip to make it delicious is to dip the rice paper in warm water for only one second. Be careful not to soak it for too long, or it will break.",
+ "Now the food is ready to be served. Eat the rolls with lettuce, coriander and fish sauce. I hope you can make it. Enjoy! Thank you for watching, see you in the next video."
+];
+/* ===== LESSON DATA END ===== */
+
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='cook2:'+LESSON+':';
+function load(k,d){try{const v=localStorage.getItem(KEY+k);return v==null?d:JSON.parse(v);}catch(e){return d;}}
+function store(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v));}catch(e){}}
+const ST=Object.assign({opened:[],checks:[],q:{},egg:null,eggMine:'',script:['','',''],draft1:null,submitted:null,attempts:0,fbCount:0,seqSeen:false},load('st',{}));
+if(!Array.isArray(ST.script)||ST.script.length!==3)ST.script=['','',''];
+const save=()=>store('st',ST);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const rand=a=>a[Math.floor(Math.random()*a.length)];
+function toast(t,ms=3000){const e=$('#toast');e.textContent=t;e.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>e.hidden=true,ms);}
+const wc=s=>String(s||'').trim().split(/\s+/).filter(Boolean).length;
+const byKey=k=>CARDS.find(c=>c.k===k);
+
+/* speech */
+let VOICE=null,readTok=0;
+function pickVoice(){if(!window.speechSynthesis)return;const vs=speechSynthesis.getVoices();VOICE=vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;}
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+function utter(t,rate){const u=new SpeechSynthesisUtterance(String(t).replace(/…/g,' ').replace(/\s+/g,' '));u.lang=VOICE?VOICE.lang:'en-US';if(VOICE)u.voice=VOICE;u.rate=rate||0.85;return u;}
+function stopSpeech(){readTok++;if(window.speechSynthesis)speechSynthesis.cancel();}
+function noTTS(){toast('This browser cannot read aloud. Please use Chrome or Safari.');}
+function say(t,rate){if(!window.speechSynthesis){noTTS();return;}stopSpeech();speechSynthesis.speak(utter(t,rate));}
+function sayAll(list,rate){if(!window.speechSynthesis){noTTS();return;}stopSpeech();list.forEach(t=>speechSynthesis.speak(utter(t,rate)));}
+function playList(list,rate,onStart,onEnd){
+  if(!window.speechSynthesis){noTTS();return;}
+  stopSpeech();const my=readTok;let i=0;
+  const next=()=>{
+    if(my!==readTok)return;
+    if(i>=list.length){onEnd&&onEnd();return;}
+    const idx=i++;onStart&&onStart(idx);
+    let done=false,tm=null;const go=()=>{if(done)return;done=true;clearTimeout(tm);next();};
+    const u=utter(list[idx],rate);u.onend=go;u.onerror=go;
+    tm=setTimeout(go,wc(list[idx])*700/rate+3500);
+    speechSynthesis.speak(u);
+  };
+  next();
+}
+
+/* compare */
+const NUM={one:'1',two:'2',three:'3',four:'4',five:'5',six:'6',seven:'7',eight:'8',nine:'9',ten:'10',fifty:'50'};
+function normStr(s){return String(s).toLowerCase().replace(/…/g,' ').replace(/-/g,' ').replace(/\bone hundred\b/g,'100').replace(/\btwo hundred\b/g,'200').replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|fifty)\b/g,m=>NUM[m]).replace(/[^a-z0-9' ]/g,' ').replace(/\s+/g,' ').trim();}
+function cmp(target,ans){
+  const T=target.split(/\s+/),tn=T.map(w=>normStr(w)),an=normStr(ans).split(' ').filter(Boolean);
+  const L=Array.from({length:tn.length+1},()=>new Array(an.length+1).fill(0));
+  for(let i=1;i<=tn.length;i++)for(let j=1;j<=an.length;j++)L[i][j]=tn[i-1]&&tn[i-1]===an[j-1]?L[i-1][j-1]+1:Math.max(L[i-1][j],L[i][j-1]);
+  const ok=new Array(tn.length).fill(false);let i=tn.length,j=an.length;
+  while(i>0&&j>0){if(tn[i-1]&&tn[i-1]===an[j-1]){ok[i-1]=true;i--;j--;}else if(L[i-1][j]>=L[i][j-1])i--;else j--;}
+  const m=ok.filter(Boolean).length;
+  return {score:Math.round(100*m/Math.max(tn.length,an.length,1)),html:T.map((w,k)=>`<span class="${ok[k]?'o':'m'}">${esc(w)}</span>`).join(' ')};
+}
+
+/* tabs */
+$$('.tab').forEach(t=>t.onclick=()=>{
+  $$('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));
+  $$('.panel').forEach(p=>p.classList.toggle('on',p.id===t.dataset.p));
+  stopSpeech();
+  if(t.dataset.p==='p3'){ST.seqSeen=true;save();}
+  applyLocks();
+  if(t.dataset.p==='p6')renderSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* 1. LEARN: adaptive mastery flow (teach first, then check, repeat until mastered) */
+const GL={ing:'INGREDIENT',tool:'TOOL',verb:'COOKING ACTION'};
+const MAXM=3;
+ST.m=ST.m||{};
+const isOpen=c=>ST.opened.includes(c.k);
+const mOf=k=>ST.m[k]||0;
+const mastered=()=>CARDS.filter(c=>mOf(c.k)>=MAXM);
+const pips=k=>{const m=Math.min(mOf(k),MAXM);return '●'.repeat(m)+'○'.repeat(MAXM-m);};
+const TL={en2vi:'Choose the Vietnamese meaning',vi2en:'Choose the English phrase',hear2vi:'Listen and choose the Vietnamese meaning',hear2en:'Listen and choose the English phrase',dict:'Listen and type what you hear'};
+const dictTarget=c=>c.en;
+let F=null;
+function pickType(c,last){
+  const m=mOf(c.k);
+  let ok=m===0?['en2vi','hear2vi','hear2en','vi2en']:['en2vi','vi2en','hear2vi','hear2en','dict'];
+    if(!window.speechSynthesis)ok=ok.filter(t=>!/hear|dict/.test(t));
+  if(!ok.length)ok=['en2vi','vi2en'];
+  if(ok.length>1)ok=ok.filter(t=>t!==last[c.k]);
+  return rand(ok);
+}
+function makeQ(c,type){
+  if(type==='dict')return {c,type};
+  const pool=ST.opened.map(byKey).filter(x=>x&&x.k!==c.k);   // wrong options only from phrases already shown
+  const f=(type==='en2vi'||type==='hear2vi')?'vi':'en';
+  const opts=shuffle([c,...shuffle(pool).slice(0,3)]).map(x=>x[f]);
+  return {c,type,opts,a:opts.indexOf(c[f])};
+}
+function newFlow(){F={phase:'flow',step:0,since:9,lastK:'',lastType:{},pend:[],cur:null,pick:-1,typed:'',answered:false,right:false};nextItem();}
+function nextItem(){
+  const unseen=CARDS.filter(c=>!isOpen(c)),learning=CARDS.filter(c=>isOpen(c)&&mOf(c.k)<MAXM);
+  F.pick=-1;F.typed='';F.answered=false;F.right=false;
+  if(!unseen.length&&!learning.length){F.phase='done';F.cur=null;return;}
+  F.step++;F.since++;
+  const teach=unseen.length&&(learning.length<2||(learning.length<4&&F.since>=3&&Math.random()<.5));
+  if(teach){F.since=0;F.cur={kind:'teach',c:unseen[0]};return;}
+  let cand=learning.filter(c=>c.k!==F.lastK);if(!cand.length)cand=learning;
+  const due=F.pend.filter(x=>x.at<=F.step).map(x=>x.k),dueC=cand.filter(c=>due.includes(c.k));
+  let c;
+  if(dueC.length)c=dueC[0];
+  else{const bag=[];cand.forEach(x=>{const n=MAXM+1-mOf(x.k);for(let i=0;i<n;i++)bag.push(x);});c=rand(bag);}
+  F.pend=F.pend.filter(x=>x.k!==c.k);
+  F.cur={kind:'q',q:makeQ(c,pickType(c,F.lastType))};
+  F.lastK=c.k;F.lastType[c.k]=F.cur.q.type;
+}
+function wordCard(c){
+  return `<div class="wcard"><div class="tag">STAGE ${c.s+1} · ${GL[c.g]}</div>
+  <div class="wen">${esc(c.en)} <button class="b" data-act="hear" aria-label="Listen">🔊</button></div>
+  <div class="hint" style="font-size:17px">${esc(c.ipa)}</div>
+  <div class="wvi">${esc(c.vi)}</div>
+  <div class="hint">${esc(c.note)}</div>
+</div>`;
+}
+function statusBar(){
+  const sum=CARDS.reduce((a,c)=>a+Math.min(mOf(c.k),MAXM),0),pct=Math.round(sum/(CARDS.length*MAXM)*100);
+  const cells=CARDS.map((c,i)=>{const m=mOf(c.k),seen=isOpen(c);return `<span class="gc ${m>=MAXM?'k':seen?'l'+Math.min(m,2):''}" title="${seen?esc(c.en):'not seen yet'}">${m>=MAXM?'✓':i+1}</span>`;}).join('');
+  return `<div class="row" style="justify-content:space-between"><span class="hint">Mastered ${mastered().length}/${CARDS.length}</span><span class="hint">Progress ${pct}%</span></div>
+  <div class="bar"><i style="width:${pct}%"></i></div><div class="gridc">${cells}</div>`;
+}
+function listBox(){
+  const seen=ST.opened.map(byKey).filter(Boolean);
+  if(!seen.length)return '';
+  return `<details class="wl"><summary>Phrases you have seen (${seen.length})</summary>`+seen.map(c=>`<div class="wrow"><div><b>${esc(c.en)}</b> <span class="hint">${esc(c.ipa)}</span><br><span class="hint">${esc(c.vi)}</span></div><div class="row"><span class="pips">${pips(c.k)}</span><button class="b" data-say="${esc(c.en)}" aria-label="Listen">🔊</button></div></div>`).join('')+`</details>`;
+}
+function drawFlow(){
+  if(!F)newFlow();
+  let body='';
+  if(F.phase==='done'){
+    body=`<div class="okbox"><h3>🎉 You have mastered all ${CARDS.length} phrases!</h3><p>Go on to tab 2 (Sequence words). Remember to press “Submit” at the end.</p></div>`;
+  }else if(F.cur.kind==='teach'){
+    body=`<div class="lv">NEW</div>${wordCard(F.cur.c)}
+    <div class="row" style="margin-top:12px"><button class="b" data-act="hear">🔊 Listen again</button><button class="b" data-act="slow">🐢 Slow</button><button class="b primary" data-act="next">Next →</button></div>
+    <p class="hint">Read the phrase aloud, then press Next.</p>`;
+  }else{
+    const q=F.cur.q,c=q.c,ans=F.answered;let stem='',ctl='';
+    if(q.type==='en2vi')stem=`<span class="wen">${esc(c.en)}</span> <button class="b" data-act="hear" aria-label="Listen">🔊</button> <span class="hint">${esc(c.ipa)}</span>`;
+    else if(q.type==='vi2en')stem=`<span class="wvi">${esc(c.vi)}</span>`;
+    else stem=`<button class="b primary" data-act="hear">🔊 Listen again</button> <button class="b" data-act="slow">🐢 Slow</button>`;
+    if(q.type==='dict'){
+      ctl=`<div class="row" style="margin-top:8px"><input type="text" id="fIn" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Type what you hear" value="${esc(F.typed)}" ${ans?'disabled':''}>${ans?'':'<button class="b primary" data-act="type">Check</button>'}</div>`;
+    }else ctl=q.opts.map((o,i)=>`<button class="opt ${ans?(i===q.a?'ok':i===F.pick?'no':''):''}" data-act="pick" data-i="${i}" ${ans?'disabled':''}>${esc(o)}</button>`).join('');
+    const fb=ans?(F.right?`<div class="okbox">✅ <b>Correct!</b> <span class="pips">${pips(c.k)}</span> ${esc(c.en)} = ${esc(c.vi)}</div>`:`<div class="warn">❌ Not yet. This phrase will come back soon.</div>${wordCard(c)}`):'';
+    body=`<div class="lv">${TL[q.type]}</div><div class="qt" style="margin-top:8px">${stem}</div>${ctl}${fb}${ans?'<div class="row" style="margin-top:10px"><button class="b primary" data-act="next">Next →</button></div>':''}`;
+  }
+  $('#flow').innerHTML=statusBar()+`<div class="flowbox">${body}</div>`+listBox();
+  const el=$('#fIn');if(el&&!F.answered)el.focus();
+}
+function afterDraw(){
+  if(!F||F.phase!=='flow'||!F.cur)return;
+  if(F.cur.kind==='teach'){say(F.cur.c.en);return;}
+  const q=F.cur.q;
+  if(/hear|dict/.test(q.type)&&!F.answered)say(dictTarget(q.c));
+}
+function nextCard(){drawFlow();afterDraw();}
+function fAnswer(ok){
+  const q=F.cur.q,c=q.c;F.answered=true;F.right=ok;
+  ST.checks.push({k:c.k,type:q.type,ok1:ok});
+  if(ok){ST.m[c.k]=mOf(c.k)+1;}
+  else{ST.m[c.k]=Math.max(0,mOf(c.k)-1);F.pend.push({k:c.k,at:F.step+2});}
+  save();applyLocks();drawFlow();
+  if(ok)say(c.en);
+}
+$('#flow').addEventListener('click',e=>{
+  const s=e.target.closest('[data-say]');if(s){say(s.dataset.say);return;}
+  const b=e.target.closest('[data-act]');if(!b)return;const a=b.dataset.act;
+  if(a==='hear'||a==='slow'){
+    const c=F.cur.kind==='teach'?F.cur.c:F.cur.q.c,r=a==='slow'?0.5:0.85;
+    say(dictTarget(c),r);
+  }
+  if(a==='pick'&&!F.answered){F.pick=+b.dataset.i;fAnswer(F.pick===F.cur.q.a);}
+  if(a==='type'&&!F.answered){
+    const v=($('#fIn').value||'').trim();if(!v){toast('Type what you hear first.');return;}
+    F.typed=v;fAnswer(normStr(v)===normStr(dictTarget(F.cur.q.c)));
+  }
+  if(a==='next'){
+    if(F.cur&&F.cur.kind==='teach'){const c=F.cur.c;if(!isOpen(c)){ST.opened.push(c.k);save();applyLocks();}}
+    nextItem();drawFlow();afterDraw();
+  }
+});
+$('#flow').addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='fIn'){const b=$('#flow [data-act=type]');if(b)b.click();}});
+$('#restart').onclick=()=>{
+  const b=$('#restart');
+  if(!b.dataset.sure){b.dataset.sure='1';b.textContent='Tap again to delete your progress';setTimeout(()=>{delete b.dataset.sure;b.textContent='↺ Start again';},3000);return;}
+  delete b.dataset.sure;b.textContent='↺ Start again';ST.opened=[];ST.checks=[];ST.m={};save();applyLocks();F=null;nextCard();
+};
+
+/* locks: nothing is tested before it has been taught */
+function applyLocks(){
+  const s0=CARDS.filter(c=>c.s===0&&mOf(c.k)<MAXM).length,all=CARDS.filter(c=>mOf(c.k)<MAXM).length;
+  const L={
+    p4:{need:[s0?`master the stage 1 phrases in tab 1 (${s0} left)`:'',!ST.seqSeen?'open tab 2 (Sequence words)':''].filter(Boolean),why:'The fried egg task uses words from stage 1 and the sequence words.'},
+    p5:{need:[all?`master all the phrases in tab 1 (${all} left)`:'',!ST.seqSeen?'open tab 2 (Sequence words)':''].filter(Boolean),why:'The spring roll task uses words from all the stages.'}
+  };
+  Object.keys(L).forEach(id=>{
+    const box=$('#lock_'+id),pn=$('#'+id),l=L[id];
+    box.hidden=l.need.length===0;
+    box.innerHTML=l.need.length?`<h2>💡 Reminder</h2><p>${l.why}</p><p>You have not finished yet: ${l.need.map(esc).join(' and ')}. You can start here now, but it is better to finish those first.</p><button class="b" data-goto="p1">Go to the cards</button>`:'';
+  });
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-goto]');if(!b)return;$$('.tab').find(t=>t.dataset.p===b.dataset.goto).click();});
+
+/* 3. SEQUENCE */
+$('#seqBox').innerHTML=SEQ.map(l=>`<div class="seq ${l.cls}"><span class="lv">${l.lv}</span>`+l.items.map(it=>`<div class="it"><div style="flex:1"><b>${esc(it.en)}</b> <span class="hint">${esc(it.g)}</span><br><i>${esc(it.ex)}</i></div><button class="b" data-say="${esc(it.ex)}" aria-label="Listen">🔊</button></div>`).join('')+`</div>`).join('');
+$('#seqBox').onclick=e=>{const b=e.target.closest('[data-say]');if(b)say(b.dataset.say);};
+function makeQuiz(boxSel,scoreSel,redoSel,items){
+  const box=$(boxSel);
+  const score=()=>items.filter(q=>ST.q[q.id]&&ST.q[q.id].first===q.a).length;
+  const drawScore=()=>{const done=items.filter(q=>ST.q[q.id]).length,s=score();
+    const cls=done&&s/items.length>=.85?'hi':s/items.length>=.6?'mid':'lo';
+    $(scoreSel).innerHTML=`<span>Done ${done}/${items.length}</span><span class="score ${done?cls:'mid'}">First-try score: ${s}/${items.length}</span>`;};
+  function render(){
+    box.innerHTML='';
+    shuffle(items).forEach((it,n)=>{
+      const d=document.createElement('div');d.className='q';
+      const order=shuffle(it.o.map((_,i)=>i));
+      d.innerHTML=`<div class="qt">${n+1}. <span class="lv">${it.lv}</span>${esc(it.q)}</div>`+order.map(i=>`<button class="opt" data-i="${i}">${esc(it.o[i])}</button>`).join('')+`<div class="expl" hidden></div>`;
+      const paint=()=>{const st=ST.q[it.id];if(!st)return;const right=st.last===it.a;
+        d.classList.toggle('right',right);d.classList.toggle('wrong',!right);
+        d.querySelectorAll('.opt').forEach(b=>{const i=+b.dataset.i;b.classList.toggle('ok',right&&i===it.a);b.classList.toggle('no',!right&&i===st.last);});
+        const ex=d.querySelector('.expl');ex.hidden=false;ex.innerHTML=right?'✅ <b>Correct!</b> '+esc(it.x):'❌ <b>Not yet.</b> Try again.';};
+      d.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;
+        const st=ST.q[it.id];if(st&&st.last===it.a)return;
+        const i=+b.dataset.i;if(!st)ST.q[it.id]={first:i,last:i};else st.last=i;save();paint();drawScore();});
+      paint();box.appendChild(d);
+    });
+    drawScore();
+  }
+  $(redoSel).onclick=()=>{items.forEach(q=>delete ST.q[q.id]);save();render();};
+  render();return {score,total:items.length};
+}
+const SQZ=makeQuiz('#sqBox','#sqScore','#sqRedo',SQ);
+
+/* 4. EGG */
+let eggPool=[],eggAns=[];
+function eggInit(){eggPool=shuffle(EGG.map((_,i)=>i));if(eggPool.every((v,i)=>v===i))eggPool.reverse();eggAns=[];eggDraw();$('#eggFb').hidden=true;}
+function eggDraw(){
+  const P=$('#eggPool'),A=$('#eggAns');P.innerHTML='';A.innerHTML='';
+  eggPool.forEach((s,k)=>{const b=document.createElement('button');b.className='step';b.textContent=EGG[s];b.onclick=()=>{eggPool.splice(k,1);eggAns.push(s);eggDraw();};P.appendChild(b);});
+  eggAns.forEach((s,k)=>{const d=document.createElement('div');d.className='slot';d.innerHTML=`<span class="n">${k+1}.</span><span style="flex:1">${esc(EGG[s])}</span>`;const x=document.createElement('button');x.className='b';x.textContent='↩';x.setAttribute('aria-label','Put this step back');x.onclick=()=>{eggAns.splice(k,1);eggPool.push(s);eggDraw();};d.appendChild(x);A.appendChild(d);});
+}
+$('#eggReset').onclick=eggInit;
+$('#eggCheck').onclick=()=>{
+  if(eggAns.length<EGG.length){toast('Put all '+EGG.length+' steps in order first.');return;}
+  const good=eggAns.filter((s,k)=>s===k).length,ok=good===EGG.length;
+  if(!ST.egg)ST.egg={first:good,ok};ST.egg.last=good;save();
+  $$('#eggAns .slot').forEach((d,k)=>d.classList.toggle('badpos',eggAns[k]!==k));
+  const fb=$('#eggFb');fb.hidden=false;
+  fb.innerHTML=ok?'✅ <b>Correct!</b> All 8 steps are in the right order.':`❌ ${good}/${EGG.length} steps are in the right place. Red steps are in the wrong place: tap ↩ and try again. <i>Hint: the word <b>Once</b> comes after you heat the oil.</i>`;
+  $('#eggFull').hidden=!ok;if(ok)say(EGG_FULL);
+};
+$('#eggText').textContent=EGG_FULL;$('#eggSay').onclick=()=>say(EGG_FULL);
+const SEQRE=[['first',/\bfirst\b/i],['next',/\bnext\b/i],['then',/\bthen\b/i],['after that',/\bafter that\b/i],['once',/\bonce\b/i],['as soon as',/\bas soon as\b/i],['when',/\bwhen\b/i],['while',/\bwhile\b/i],['meanwhile',/\bmeanwhile\b/i],['until',/\buntil\b/i],['finally',/\bfinally\b/i],['eventually',/\beventually\b/i],['at that time/point',/\bat that (time|point)\b/i]];
+const seqUsed=t=>SEQRE.filter(([n,re])=>re.test(t)).map(x=>x[0]);
+const eggMine=$('#eggMine');eggMine.value=ST.eggMine||'';
+function eggMineUpd(){const u=seqUsed(eggMine.value);$('#eggMineCk').innerHTML=`${wc(eggMine.value)} words · different sequence words used: <b>${u.length}</b>/4 ${u.length>=4?'✅':''}${u.length?' ('+u.join(', ')+')':''}`;}
+eggMine.oninput=()=>{ST.eggMine=eggMine.value;save();eggMineUpd();};eggMineUpd();
+
+/* 5. SPRING ROLLS */
+const VERBRE=/\b(stir|add|pour|squeeze|mince|chop|slice|wrap|roll|heat|cut|fry|mix|soak|drain|season|boil|serve|fold|grate|dip|put|turn)\b/gi;
+const QTYRE=/\b(pinch|cloves?|sheets?|bunch|head|tablespoons?|teaspoons?|grams?|handful|spoonful|cup)\s+of\b/gi;
+const scParts=()=>ST.script.map(s=>s.trim());
+const scText=()=>scParts().join('\n').trim();
+$$('textarea[data-s]').forEach(t=>{t.value=ST.script[+t.dataset.s]||'';t.oninput=()=>{ST.script[+t.dataset.s]=t.value;save();scUpd();};});
+function goals(parts){
+  const T=parts.join('\n'),verbs=new Set((T.match(VERBRE)||[]).map(x=>x.toLowerCase())),su=seqUsed(T),q=(T.match(QTYRE)||[]).length,n=wc(T);
+  return [
+   ['Opening: greet your viewers and say what you will show (Hello everyone! Today …)',/(hello|hi)\b[^.!?]*\b(everyone|everybody|guys|friends)/i.test(parts[0])&&/today/i.test(parts[0])&&/spring rolls?/i.test(parts[0])],
+   ['Use at least 4 quantity phrases (a pinch of, 2 cloves of, 10 sheets of …): '+q+'/4',q>=4],
+   ['Use at least 4 different sequence words: '+su.length+'/4',su.length>=4],
+   ['Use at least 5 different cooking verbs: '+verbs.size+'/5',verbs.size>=5],
+   ['Give a tip (The tip … is to / Make sure / Be careful not to)',/(the tip|the secret|make sure|be careful)/i.test(T)],
+   ['Ending: thank your viewers (Thank you for watching)',/(thank you for watching|thanks for watching|see you)/i.test(parts[2])],
+   ['Write '+WMIN+'–'+WMAX+' words ('+n+')',n>=WMIN&&n<=WMAX]
+  ];
+}
+function scUpd(){
+  $('#scCount').innerHTML=`<b>${wc(scText())}</b> words (aim for ${WMIN}–${WMAX})`;
+  $('#scCheck').innerHTML=goals(scParts()).map(([t,ok])=>`<li>${ok?'✅':'⬜'} ${esc(t)}</li>`).join('');
+}
+$('#scModel').onclick=()=>{const b=$('#scModelBox');b.hidden=false;b.innerHTML='<b>Model text</b><br><br>'+MODEL.map(esc).join('<br><br>');};
+scUpd();
+
+const RULES=[
+ [/\bi\b/,'Write “I” with a capital letter.'],
+ [/\b(salts|sugars|garlics|honeys|vermicellis|informations|advices)\b/i,'This word is uncountable. Do not add -s.'],
+ [/\ba rice paper\b/i,'Say “a sheet of rice paper”.'],
+ [/\b(two|three|four|five|some|many|these|those)\s+knife\b/i,'The plural of “knife” is “knives”.'],
+ [/\b(a|an|one)\s+knives\b/i,'Use “a knife” for one.'],
+ [/\b(a|one)\s+chopsticks?\b/i,'Say “a pair of chopsticks”.'],
+ [/\b(he|she|it)\s+(add|mix|fry|cut|heat|roll|wrap|chop|stir|pour|put|cook|need|take|make|taste)\b/i,'After he / she / it, the verb needs -s (it needs, she adds).'],
+ [/\b(we|you|they|i)\s+(adds|mixes|fries|cuts|heats|rolls|wraps|chops|stirs|pours|puts|cooks|needs|takes|makes)\b/i,'After I / you / we / they, do not add -s to the verb.'],
+ [/\b(should|can|must|will|could|would)\s+to\b/i,'Do not use “to” after should / can / must / will.'],
+ [/\bcut\b[^.!?]*\bin small\b/i,'Say “cut into small pieces”.'],
+ [/\bstir (it |them )?(good|nice|very good)\b/i,'Say “stir well”.'],
+ [/\bin to\b/i,'Write “into” as one word.'],
+ [/\bdo (the |a )?(filling|sauce|spring rolls?|rolls)\b/i,'Use “make”, not “do”, for food.'],
+ [/\b(once|as soon as|when|until)\b[^.!?,]*\bwill\b/i,'After once / as soon as / when / until, use the present simple, not “will”.'],
+ [/\bvietnam(ese)?\b/,'Vietnam and Vietnamese start with a capital letter.'],
+ [/\b(\w+)\s+\1\b/i,'A word is repeated. Delete one.'],
+ [/\b(pinch|cloves?|sheets?|bunch|head|tablespoons?|teaspoons?|grams?|handful|spoonful)\s+(?!of\b)(?!and\b)(?!or\b)(?![,.;!?])[a-z]+/i,'Use “of” after a quantity word: a pinch of salt, 2 cloves of garlic.'],
+ [/\bvery much\s+(delicious|tasty|healthy)\b/i,'Say “very delicious” or “really tasty”, not “very much”.'],
+ [/\bmore better\b|\bmost easy\b/i,'Use “better” or “easiest”.'],
+ [/\bthe tip (to make it delicious )?are\b/i,'Use “is” after “the tip”.'],
+ [/\bat the first\b/i,'Say “First,” or “At first,”.'],
+ [/\bafter that then\b|\bthen after that\b/i,'Use only one: “After that,” or “Then,”.'],
+ [/\b(a|an)\s+(spring rolls|glass noodles|noodles|eggs|onions|shallots|carrots)\b/i,'Use the singular after “a / an”.']
+];
+function sents(t){return (t.match(/[^.!?\n]+[.!?]*/g)||[]).map(x=>x.trim()).filter(x=>/[A-Za-z]/.test(x));}
+function articleIssues(s){
+  const out=[];const re=/\b(a|an)\s+([A-Za-z]+)/gi;let m;
+  while((m=re.exec(s))){const w=m[2].toLowerCase(),art=m[1].toLowerCase();
+    const vowel=(/^[aeiou]/.test(w)&&!/^(uni|use|usu|eu|one|once)/.test(w))||/^(hour|honest|heir)/.test(w);
+    const need=vowel?'an':'a';if(art!==need)out.push(`Use “${need} ${m[2]}”, not “${m[1]} ${m[2]}”.`);}
+  return out;
+}
+function analyze(parts){
+  const issues=[],names=['Opening','Body','Ending'];
+  parts.forEach((p,pi)=>{
+    sents(p).forEach(s=>{
+      const add=m=>{if(!issues.some(x=>x.s===s&&x.msg===m))issues.push({part:names[pi],s,msg:m});};
+      if(/^[a-z]/.test(s))add('Start the sentence with a capital letter.');
+      if(!/[.!?]$/.test(s))add('Add a full stop (.) at the end of the sentence.');
+      RULES.forEach(([re,msg])=>{if(re.test(s))add(msg);});
+      articleIssues(s).forEach(add);
+      if(/^(First|Next|Then|Finally|Meanwhile|Eventually|After that|Second|Third)\s+/.test(s))add('Add a comma after the sequence word: “'+s.split(/\s+/)[0]+',”.');
+      if(wc(s)>35)add('This sentence is very long. Try to split it into two sentences.');
+    });
+  });
+  if((parts.join(' ').match(/\bthen\b/gi)||[]).length>3)issues.push({part:'All',s:'(whole text)',msg:'You use “then” many times. Try “next”, “after that”, “once” or “as soon as”.'});
+  return issues;
+}
+function renderFeedback(parts){
+  const iss=analyze(parts),g=goals(parts),box=$('#fbBox');box.hidden=false;
+  const missing=g.filter(x=>!x[1]);
+  let h='';
+  h+=iss.length?`<h3>Language tips (${iss.length})</h3>`+iss.map(i=>`<div class="issue"><b>${i.part}:</b> <q>${esc(i.s.length>90?i.s.slice(0,90)+'…':i.s)}</q><br>${esc(i.msg)}</div>`).join(''):`<div class="okbox">✅ No language problems found. Good job!</div>`;
+  h+=missing.length?`<h3>Goals to improve</h3>`+missing.map(x=>`<div class="issue" style="border-color:#E0A800;background:#fffaf0">${esc(x[0])}</div>`).join(''):`<div class="okbox">✅ You reached all the goals.</div>`;
+  h+=`<p class="hint">Change your text and press “Submit for feedback” again, or go on to read and record.</p>`;
+  box.innerHTML=h;return iss.length;
+}
+$('#scSubmit').onclick=()=>{
+  const parts=scParts();
+  if(wc(parts.join(' '))<20){toast('Write more of your text first.');return;}
+  if(!ST.draft1)ST.draft1=parts.slice();
+  ST.attempts++;ST.submitted=parts.slice();ST.fbCount=renderFeedback(parts);save();
+  $('#scAtt').textContent='Feedback given '+ST.attempts+' time'+(ST.attempts>1?'s':'');
+  $('#scModel').hidden=false;unlockPractice();
+  $('#fbBox').scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+function unlockPractice(){if(!ST.submitted)return;$('#readCard').hidden=false;$('#recCard').hidden=false;drawRead();}
+let readSents=[];
+function drawRead(){
+  readSents=sents(ST.submitted.join('\n'));
+  const box=$('#readBox');box.innerHTML='';
+  readSents.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='sent';d.id='rs'+i;
+    d.innerHTML=`<span class="t">${esc(s)}</span><button class="b" data-a="n" aria-label="Listen">🔊</button><button class="b" data-a="s" aria-label="Listen slowly">🐢</button>`;
+    box.appendChild(d);
+  });
+}
+$('#readBox').addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const i=[...$('#readBox').children].indexOf(b.closest('.sent'));
+  say(readSents[i],b.dataset.a==='s'?0.5:+$('#rate').value);});
+$('#playAll').onclick=()=>{
+  playList(readSents,+$('#rate').value,i=>{$$('#readBox .sent').forEach((x,k)=>x.classList.toggle('hl',k===i));const el=$('#rs'+i);if(el)el.scrollIntoView({block:'nearest'});},()=>$$('#readBox .sent').forEach(x=>x.classList.remove('hl')));
+};
+$('#stopAll').onclick=()=>{stopSpeech();$$('#readBox .sent').forEach(x=>x.classList.remove('hl'));};
+
+/* audio recording */
+const SRC=window.SpeechRecognition||window.webkitSpeechRecognition;
+let mr=null,rstream=null,chunks=[],rec={blob:null,mime:'',dur:0,sent:false,transcript:'',score:null},rt0=0,rtick=null,rpauseAt=0,rpaused=0,sr=null;
+const rElapsed=()=>Math.round((Date.now()-rt0-rpaused)/1000);
+function recUI(state){
+  $('#recStart').disabled=state!=='idle';$('#recPause').disabled=state==='idle';$('#recStop').disabled=state==='idle';
+  $('#recPause').textContent=state==='paused'?'▶ Resume':'⏸ Pause';
+}
+$('#recStart').onclick=async()=>{
+  if(!ST.submitted){toast('Submit your text for feedback first.');return;}
+  if(!navigator.mediaDevices||!window.MediaRecorder){toast('This browser cannot record. Please use Chrome or Safari.',5000);return;}
+  stopSpeech();
+  try{
+    rstream=await navigator.mediaDevices.getUserMedia({audio:true});
+    chunks=[];mr=new MediaRecorder(rstream);rec.transcript='';rpaused=0;
+    mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+    mr.onstop=()=>{
+      rstream.getTracks().forEach(t=>t.stop());clearInterval(rtick);try{sr&&sr.stop();}catch(e){}
+      rec.mime=(mr.mimeType||'audio/webm').split(';')[0];rec.blob=new Blob(chunks,{type:rec.mime});rec.dur=rElapsed();rec.sent=false;
+      $('#recAudio').src=URL.createObjectURL(rec.blob);$('#recOut').hidden=false;$('#recMsg').textContent='';$('#recTime').textContent='Recorded '+rec.dur+' seconds';recUI('idle');
+      setTimeout(()=>{if(rec.transcript){rec.score=cmp(ST.submitted.join(' ').replace(/\s+/g,' '),rec.transcript).score;$('#recScore').textContent='The computer heard about '+rec.score+'% of your text. Listen to the model and try again if you want to improve.';}else{rec.score=null;$('#recScore').textContent='';}},400);
+    };
+    rt0=Date.now();mr.start();recUI('rec');
+    rtick=setInterval(()=>{if(mr.state==='recording'){const s=rElapsed();$('#recTime').textContent='🔴 '+s+' s';if(s>=300)mr.stop();}},500);
+    if(SRC){try{sr=new SRC();sr.lang='en-US';sr.continuous=true;sr.interimResults=false;sr.onresult=e=>{rec.transcript='';for(let i=0;i<e.results.length;i++)rec.transcript+=e.results[i][0].transcript+' ';};sr.start();}catch(e){}}
+  }catch(err){toast('Please tap “Allow” for the microphone.',4000);}
+};
+$('#recPause').onclick=()=>{
+  if(!mr)return;
+  if(mr.state==='recording'){mr.pause();rpauseAt=Date.now();try{sr&&sr.stop();}catch(e){}recUI('paused');$('#recTime').textContent='⏸ Paused';}
+  else if(mr.state==='paused'){mr.resume();rpaused+=Date.now()-rpauseAt;recUI('rec');if(SRC&&sr){try{sr.start();}catch(e){}}}
+};
+$('#recStop').onclick=()=>{if(mr&&mr.state!=='inactive'){if(mr.state==='paused'){rpaused+=Date.now()-rpauseAt;}mr.stop();}};
+$('#modelPlay').onclick=()=>playList(readSents,+$('#rate').value,null,null);
+$('#modelStop').onclick=()=>stopSpeech();
+function b64(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});}
+async function postJSON(obj){
+  const body=JSON.stringify(obj);
+  try{
+    const r=await fetch(SCRIPT_URL,{method:'POST',body,headers:{'Content-Type':'text/plain;charset=utf-8'},redirect:'follow'});
+    const j=await r.json();if(!j.ok)throw new Error(j.error||'fail');return j;
+  }catch(err){
+    if(err instanceof TypeError){await fetch(SCRIPT_URL,{method:'POST',body,mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'}});return {ok:true};}
+    throw err;
+  }
+}
+const HAS_URL=/^https:\/\/script\.google(usercontent)?\.com\//.test(SCRIPT_URL);
+if(!HAS_URL)$('#noUrl').hidden=false;
+const stuName=()=>($('#stuName').value||load('name','')).trim();
+$('#recSend').onclick=async()=>{
+  if(!rec.blob)return;
+  if(!HAS_URL){$('#recMsg').textContent='No submission link yet.';return;}
+  const name=stuName();if(!name){toast('Type your name on the Submit tab first.');return;}
+  const btn=$('#recSend');btn.disabled=true;$('#recMsg').textContent='Sending…';
+  const ext=rec.mime.includes('mp4')?'m4a':rec.mime.includes('ogg')?'ogg':'webm';
+  for(let k=0;k<3;k++){
+    try{
+      await postJSON({type:'audio',name,lesson:LESSON,file:'DocTo_01_SpringRoll.'+ext,mime:rec.mime,label:'Read aloud: how to make spring rolls',target:ST.submitted.join('\n'),transcript:rec.transcript,score:rec.score,dur:rec.dur,audio:await b64(rec.blob)});
+      rec.sent=true;$('#recMsg').textContent='✅ Sent to your teacher';btn.disabled=false;return;
+    }catch(e){await new Promise(r=>setTimeout(r,1500*(k+1)));}
+  }
+  $('#recMsg').textContent='⚠️ Could not send (weak network?). Try again.';btn.disabled=false;
+};
+window.addEventListener('beforeunload',e=>{if((mr&&mr.state!=='inactive')||(rec.blob&&!rec.sent)){e.preventDefault();e.returnValue='';}});
+
+/* SUBMIT */
+const chkStat=()=>({n:ST.checks.length,ok:ST.checks.filter(x=>x.ok1).length});
+function renderSummary(){
+  $('#stuName').value=load('name','');const cs=chkStat();
+  $('#sumBox').innerHTML=`<table><tr><th>Part</th><th>Result</th></tr>
+   <tr><td>1 Phrases learned</td><td>${mastered().length}/${CARDS.length} phrases mastered (seen ${ST.opened.length}) · answers correct on the first try: ${cs.ok}/${cs.n}</td></tr>
+   <tr><td>2 Sequence words</td><td>${SQZ.score()}/${SQZ.total} (first try)</td></tr>
+   <tr><td>3 Fried egg</td><td>${ST.egg?(ST.egg.ok?'correct on the first try':'not correct on the first try ('+ST.egg.first+'/8)'):'not done'} · own text: ${wc(ST.eggMine)} words</td></tr>
+   <tr><td>4 Spring roll text</td><td>${wc(scText())} words · feedback given ${ST.attempts} time(s)</td></tr>
+   <tr><td>4 Recording</td><td>${rec.sent?'sent':rec.blob?'You have a recording that is NOT sent yet':'not recorded'}</td></tr></table>
+   ${rec.blob&&!rec.sent?'<p class="warn">⚠️ Go to tab 4, listen to your recording and press <b>Send my recording</b>.</p>':''}`;
+}
+function buildSummary(){
+  const details=[],cs=chkStat();
+  details.push({part:'Phrases learned',question:'Cards opened',answer:mastered().length+'/'+CARDS.length+' mastered, '+ST.opened.length+' seen',correct:String(CARDS.length),result:'Answers first try '+cs.ok+'/'+cs.n});
+  SQ.forEach(q=>{const s=ST.q[q.id];if(s)details.push({part:'Sequence '+q.id.slice(1),question:q.q,answer:q.o[s.first]+(s.last!==s.first?' (changed: '+q.o[s.last]+')':''),correct:q.o[q.a],result:s.first===q.a?'Correct':'Wrong'});});
+  if(ST.egg)details.push({part:'Fried egg order',question:'Order 8 steps',answer:ST.egg.first+'/8 in the right place (first try)',correct:'8/8',result:ST.egg.ok?'Correct':'Wrong'});
+  if(ST.eggMine.trim())details.push({part:'Fried egg: own text',question:'Write how to fry an egg',answer:ST.eggMine.trim(),correct:'(teacher checks)',result:wc(ST.eggMine)+' words; '+seqUsed(ST.eggMine).length+' sequence words'});
+  if(ST.draft1)details.push({part:'Spring roll text: first draft',question:'Opening / Body / Ending',answer:ST.draft1.join('\n\n'),correct:'(teacher checks)',result:wc(ST.draft1.join(' '))+' words'});
+  if(scText())details.push({part:'Spring roll text: final',question:'Opening / Body / Ending',answer:scParts().join('\n\n'),correct:'(teacher checks)',result:wc(scText())+' words; feedback '+ST.attempts+'×; last tips '+ST.fbCount+'; goals '+goals(scParts()).filter(x=>x[1]).length+'/7'});
+  return {summary:{recordings:rec.sent?1:0,avg:rec.score,
+    full:'Recording: '+(rec.sent?'sent':'not sent'),
+    writes:'Spring roll text '+wc(scText())+' words · feedback '+ST.attempts+'× · egg text '+wc(ST.eggMine)+' words',
+    quiz:'Phrases mastered '+mastered().length+'/'+CARDS.length+' · answers '+cs.ok+'/'+cs.n+' · Sequence '+SQZ.score()+'/'+SQZ.total},details};
+}
+$('#submitBtn').onclick=async()=>{
+  const msg=$('#submitMsg');
+  if(!HAS_URL){msg.textContent='⚙️ This page has no submission link yet.';return;}
+  const name=stuName();if(!name){toast('Type your name first.');$('#stuName').focus();return;}
+  store('name',name);const btn=$('#submitBtn');btn.disabled=true;btn.textContent='Sending…';
+  try{await postJSON(Object.assign({type:'submit',name,lesson:LESSON,link:location.href},buildSummary()));
+    msg.innerHTML='✅ <b>Submitted!</b> Your teacher has your work.';toast('✅ Submitted to your teacher!',5000);
+  }catch(e){msg.textContent='⚠️ Could not send (weak network?). Press submit again.';}
+  finally{btn.disabled=false;btn.textContent='📨 Submit to my teacher';}
+};
+$('#stuName').oninput=e=>store('name',e.target.value);
+(function(){
+  const g=$('#gate'),inp=$('#gateName');g.hidden=!!load('name','');
+  const go=()=>{const v=inp.value.trim();if(!v){inp.focus();return;}store('name',v);$('#stuName').value=v;g.hidden=true;};
+  $('#gateGo').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go();};
+})();
+
+nextCard();eggInit();applyLocks();
+if(ST.submitted){$('#scAtt').textContent='Feedback given '+ST.attempts+' time'+(ST.attempts>1?'s':'');$('#scModel').hidden=false;unlockPractice();}
+</script>
+</body>
+</html>
