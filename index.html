@@ -78,7 +78,7 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--li
 <div id="gate"><div class="gbox"><div style="font-size:44px">🍳</div><h2>Welcome!</h2><p>Please type your name to start.</p><input type="text" id="gateName" placeholder="Your full name" autocomplete="name"><p></p><button class="b primary" id="gateGo">Start learning</button></div></div>
 
 <div class="wrap">
-  <div class="hero"><h1>🍳 I'll show you how to cook</h1><p>Cooking words and phrases · Sequence words · Make a recording about fried spring rolls</p></div>
+  <div class="hero"><h1>🍳 I'll show you how to cook</h1><p>Cooking words and phrases · Sequence words · Make a recording about fresh spring rolls</p></div>
   <div class="tabs" role="tablist">
     <button class="tab" data-p="p1" aria-selected="true">1 Learn phrases</button>
     <button class="tab" data-p="p3" aria-selected="false">2 Sequence words</button>
@@ -140,42 +140,42 @@ table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--li
   <section class="panel" id="p5">
     <div class="card lockcard" id="lock_p5" hidden></div>
     <div class="card">
-      <h2>Information: fried spring rolls</h2>
-      <p class="hint">Use this information to write your own text. Do not copy it: write full sentences.</p>
+      <h2>Useful words: fresh spring rolls (gỏi cuốn)</h2>
+      <p class="hint">Your recipe can be different from this list. Use only the words you need, and write full sentences in your own way.</p>
       <table>
-        <tr><th>Ingredients</th><td>10 sheets of rice paper · 50 g glass noodles · 200 g minced pork · 2 cloves of garlic · 2 shallots · ½ onion · a pinch of salt · 1 tablespoon of sugar · a pinch of black pepper · enough oil to fry · 1 head of lettuce · 1 bunch of coriander</td></tr>
-        <tr><th>Dipping sauce</th><td>2 tablespoons of fish sauce · 1 tablespoon of honey · the juice of half a lime · 1 red chili</td></tr>
-        <tr><th>Tools</th><td>bowl · cutting board · knife · pan · plate · spoon · pair of chopsticks · stove · paper towel</td></tr>
-        <tr><th>Steps</th><td>1 soak the glass noodles in warm water until soft, cut into small pieces · 2 chop the onion and shallots, mince the garlic · 3 mix the pork, noodles, onion, shallots and garlic in a bowl; season with salt, sugar and pepper; stir well · 4 put a spoonful of filling on rice paper, fold in the sides, roll tightly · 5 heat the oil in a pan over medium heat · 6 fry the rolls until golden brown (about 8 minutes), turn them over · 7 drain on a paper towel, put on a plate · 8 serve with lettuce, coriander and dipping sauce</td></tr>
-        <tr><th>Tip</th><td>dip the rice paper in warm water for only one second; use medium heat so the rolls do not burn</td></tr>
+        <tr><th>Ingredients</th><td>rice paper · shrimp · pork belly · vermicelli · lettuce · mint · coriander · cucumber · carrot · bean sprouts · peanuts</td></tr>
+        <tr><th>Sauce</th><td>dipping sauce · fish sauce · peanut sauce · hoisin sauce · lime juice · garlic · sugar · chili</td></tr>
+        <tr><th>Tools</th><td>pot · bowl · plate · knife · cutting board · chopsticks</td></tr>
+        <tr><th>Actions</th><td>boil · peel · slice · cut in half · drain · dip · lay · put · place · fold · roll · mix · serve</td></tr>
+        <tr><th>Sequence words</th><td>First · Next · Then · After that · Once · Meanwhile · Finally</td></tr>
+        <tr><th>Useful chunks</th><td>dip the rice paper in warm water · roll it tightly · serve with dipping sauce · The tip to make it delicious is to … · Be careful not to …</td></tr>
+        <tr><th>Opening / ending</th><td>Hello everyone! Today I'm going to show you … · Thank you for watching, see you in the next video.</td></tr>
       </table>
     </div>
 
     <div class="card">
       <h2>Step 1 · Write your text</h2>
-      <p>Imagine you are making a cooking video. Write your text in three paragraphs: <b>opening</b>, <b>body</b> and <b>ending</b>.</p>
+      <p>Imagine you are making a cooking video about fresh spring rolls. Write your text in three paragraphs: <b>opening</b>, <b>body</b> and <b>ending</b>.</p>
       <div class="sect"><h3>Opening</h3><textarea data-s="0" placeholder="Hello everyone! Today I'm going to show you …"></textarea></div>
       <div class="sect"><h3>Body</h3><textarea data-s="1" style="min-height:190px" placeholder="First, …"></textarea></div>
       <div class="sect"><h3>Ending</h3><textarea data-s="2" placeholder="Now the food is ready to be served. …"></textarea></div>
       <div class="tip" id="scCount"></div>
-      <div class="hint">Your goals:</div>
-      <ul id="scCheck" style="list-style:none;padding:0;margin:6px 0"></ul>
       <div class="row"><button class="b primary" id="scSubmit">📝 Submit for feedback</button><span class="hint" id="scAtt"></span></div>
       <div id="fbBox" hidden></div>
       <button class="b" id="scModel" hidden>💡 Show a model text</button>
       <div class="tip" id="scModelBox" hidden></div>
     </div>
 
-    <div class="card" id="readCard" hidden>
+    <div class="card" id="readCard">
       <h2>Step 2 · Practise reading</h2>
-      <p class="hint">Listen to each sentence, then read it aloud. Tap 🔊 for the chosen speed or 🐢 for very slow. This is the text you submitted.</p>
+      <p class="hint">Listen to each sentence, then read it aloud. Tap 🔊 for the chosen speed or 🐢 for very slow. This is the text you wrote in Step 1.</p>
       <div class="row"><label class="hint">Speed
         <select id="rate"><option value="0.6">Very slow</option><option value="0.8" selected>Slow</option><option value="1">Normal</option></select></label>
         <button class="b primary" id="playAll">▶ Play all</button><button class="b" id="stopAll">⏹ Stop</button></div>
       <div id="readBox"></div>
     </div>
 
-    <div class="card" id="recCard" hidden>
+    <div class="card" id="recCard">
       <h2>Step 3 · Record your voice</h2>
       <p class="hint">Read your text aloud. You can pause, stop whenever you want, listen to your recording, listen to the model reading, and record again. Send it only when you are happy.</p>
       <div class="row">
@@ -217,41 +217,47 @@ const LESSON='cooking-spring-roll';
 
 function C(g,en,vi,ipa,note,ex,def){return {g,en,vi,ipa,note,ex,def};}
 const CARDS=[
- C('ing','2 cloves of garlic','2 tép tỏi','/tu kloʊvz əv ˈɡɑrlɪk/','Garlic is uncountable: count it with cloves or bulbs.','Mince two cloves of garlic.','Two small pieces from a garlic bulb.'),
- C('ing','a pinch of salt','một nhúm muối','/ə pɪntʃ əv sɔlt/','Salt is uncountable: use a pinch or a teaspoon.','Add a pinch of salt.','A very small amount of salt, held between two fingers.'),
- C('ing','a tablespoon of sugar','một muỗng canh đường','/ə ˈteɪbəlˌspun əv ˈʃʊɡər/','A tablespoon is a big spoon; a teaspoon is a small spoon.','Add a tablespoon of sugar and stir well.','A big spoon full of sweet white crystals.'),
- C('ing','50 grams of glass noodles','50 g miến','/ˈfɪfti ɡræmz əv ɡlæs ˈnudəlz/','Glass noodles is always plural.','Soak the glass noodles in warm water.','A weight of clear, thin noodles.'),
- C('ing','10 sheets of rice paper','10 tờ bánh tráng','/tɛn ʃits əv raɪs ˈpeɪpər/','Rice paper is uncountable: use a sheet or a pack.','Wrap the filling in a sheet of rice paper.','Ten thin, round wrappers used for spring rolls.'),
- C('ing','2 shallots, finely chopped','2 củ hành tím, băm nhỏ','/tu ʃəˈlɑts ˈfaɪnli tʃɑpt/','Shallots are countable. Finely chopped = in very small pieces.','Add two shallots, finely chopped.','Two small purple onions cut into very small pieces.'),
- C('ing','2 tablespoons of fish sauce','2 muỗng canh nước mắm','/tu ˈteɪbəlˌspunz əv fɪʃ sɔs/','Tablespoons gets an s; fish sauce does not change.','Pour two tablespoons of fish sauce into the bowl.','Two big spoons of a salty brown sauce made from fish.'),
- C('ing','200 grams of minced pork','200 g thịt heo băm','/tu ˈhʌndrəd ɡræmz əv mɪnst pɔrk/','Minced pork is uncountable: use grams. (US: ground pork)','Mix 200 grams of minced pork with the noodles.','A weight of meat that is cut into very small pieces.'),
- C('tool','fry in a pan','chiên trong chảo','/fraɪ ɪn ə pæn/','A pan is flat; use it for frying.','Fry the egg in a pan.','Cook in hot oil in a flat metal container with a handle.'),
- C('tool','turn on the stove','bật bếp','/tɜrn ɑn ðə stoʊv/','Turn on the stove; turn off the stove.','Turn on the stove and heat the oil.','Start the cooking heat.'),
- C('tool','drain on a paper towel','để ráo dầu trên giấy thấm','/dreɪn ɑn ə ˈpeɪpər ˈtaʊəl/','A paper towel takes away extra oil.','Drain the rolls on a paper towel.','Put fried food on soft paper to take away extra oil.'),
- C('verb','stir well','khuấy đều','/stɜr wɛl/','Stir = move food around with a spoon.','Stir well until the sugar melts.','Mix food with a spoon until it is all the same.'),
- C('verb','mince the garlic','băm nhỏ tỏi','/mɪns ðə ˈɡɑrlɪk/','Minced garlic = garlic in very tiny pieces.','Mince the garlic and add it to the pork.','Cut garlic into extremely small pieces.'),
- C('verb','roll it tightly','cuộn chặt','/roʊl ɪt ˈtaɪtli/','Tightly = with no space inside.','Roll it tightly so it does not break.','Turn the wrapper over and over so there is no space inside.'),
- C('verb','heat the oil over medium heat','đun nóng dầu ở lửa vừa','/hit ðə ɔɪl ˈoʊvər ˈmidiəm hit/','Medium heat = not high, not low.','Heat the oil in a pan over medium heat.','Make oil hot on a middle-size flame.'),
- C('verb','cut into small pieces','cắt thành miếng nhỏ','/kʌt ˈɪntu smɔl ˈpisɪz/','cut … into + pieces','Cut the lettuce into small pieces.','Make big food into many little parts.'),
- C('verb','soak in warm water','ngâm trong nước ấm','/soʊk ɪn wɔrm ˈwɔtər/','Soak = leave something in water.','Soak the glass noodles in warm water.','Leave food in warm water until it is soft.'),
- C('verb','fry until golden brown','chiên đến khi vàng nâu','/fraɪ ənˈtɪl ˈɡoʊldən braʊn/','until + a sign that shows when to stop','Fry the rolls until golden brown.','Cook in hot oil until the color is yellow-brown.'),
- C('verb','crack an egg','đập trứng','/kræk æn ɛɡ/','Crack = break the shell.','Crack two eggs into a small bowl.','Break the shell of an egg.'),
- C('verb','put a spoonful of filling','cho một muỗng nhân','/pʊt ə ˈspunˌfʊl əv ˈfɪlɪŋ/','A spoonful = the amount on one spoon.','Put a spoonful of filling on the rice paper.','Place one spoon of the mixture in the middle.'),
- C('verb','fold in the sides','gấp hai mép vào','/foʊld ɪn ðə saɪdz/','Fold = bend something over.','Fold in the sides and roll it tightly.','Bend the left and right edges to the middle.'),
- C('verb','mix the dipping sauce','pha nước chấm','/mɪks ðə ˈdɪpɪŋ sɔs/','Dipping sauce = sauce for dipping food.','Mix the dipping sauce in a small bowl.','Stir fish sauce, honey, lime and chili together.'),
- C('tool','put on a plate','bày ra đĩa','/pʊt ɑn ə pleɪt/','A plate is flat; a bowl is deep.','Put the rolls on a plate.','Place food on a flat dish to serve it.'),
- C('verb','chop the onion','thái / băm hành','/tʃɑp ði ˈʌnjən/','Chop = cut into small pieces with a knife.','Chop the onion roughly.','Cut an onion into small pieces with a knife.'),
- C('verb','serve with fish sauce','dọn kèm nước mắm','/sɜrv wɪð fɪʃ sɔs/','Serve = put food on the table.','Serve the rolls with fish sauce and lettuce.','Put the food on the table together with sauce.')
+ C('tool','turn on the stove','bật bếp','/tɜrn ɑn ðə stoʊv/','Turn on the stove; turn off the stove.','',''),
+ C('tool','boil in a pot','luộc trong nồi','/bɔɪl ɪn ə pɑt/','A pot is deep and round; use it for boiling.','',''),
+ C('tool','fry in a pan','chiên trong chảo','/fraɪ ɪn ə pæn/','A pan is flat; use it for frying.','',''),
+ C('verb','crack an egg','đập trứng','/kræk æn ɛɡ/','Crack = break the shell.','',''),
+ C('verb','heat the oil over medium heat','đun nóng dầu ở lửa vừa','/hit ðə ɔɪl ˈoʊvər ˈmidiəm hit/','Medium heat = not high, not low.','',''),
+ C('verb','stir well','khuấy đều','/stɜr wɛl/','Stir = move food around with a spoon.','',''),
+ C('ing','a pinch of salt','một nhúm muối','/ə pɪntʃ əv sɔlt/','Salt is uncountable: use a pinch or a teaspoon.','',''),
+ C('tool','put on a plate','bày ra đĩa','/pʊt ɑn ə pleɪt/','A plate is flat; a bowl is deep.','',''),
+ C('ing','a tablespoon of sugar','một muỗng canh đường','/ə ˈteɪbəlˌspun əv ˈʃʊɡər/','A tablespoon is a big spoon.','',''),
+ C('ing','2 tablespoons of fish sauce','2 muỗng canh nước mắm','/tu ˈteɪbəlˌspunz əv fɪʃ sɔs/','Tablespoons gets an s; fish sauce does not change.','',''),
+ C('ing','2 cloves of garlic','2 tép tỏi','/tu kloʊvz əv ˈɡɑrlɪk/','Garlic is uncountable: count it with cloves.','',''),
+ C('verb','mix the dipping sauce','pha nước chấm','/mɪks ðə ˈdɪpɪŋ sɔs/','Dipping sauce = sauce for dipping food.','',''),
+ C('ing','a handful of crushed peanuts','một nắm đậu phộng giã nhỏ','/ə ˈhændfʊl əv krʌʃt ˈpiˌnʌts/','A handful = as much as one hand can hold.','',''),
+ C('ing','10 shrimp, peeled','10 con tôm, đã bóc vỏ','/tɛn ʃrɪmp pild/','Shrimp does not change in the plural.','',''),
+ C('ing','100 grams of boiled pork belly','100 g thịt ba chỉ luộc','/wʌn ˈhʌndrəd ɡræmz əv bɔɪld pɔrk ˈbɛli/','Pork belly is uncountable: use grams.','',''),
+ C('ing','50 grams of vermicelli','50 g bún','/ˈfɪfti ɡræmz əv ˌvɜrməˈtʃɛli/','Vermicelli is uncountable: use grams or a handful.','',''),
+ C('ing','a bunch of fresh mint','một bó rau bạc hà tươi','/ə bʌntʃ əv frɛʃ mɪnt/','Use a bunch for fresh herbs.','',''),
+ C('ing','a bunch of coriander','một bó rau ngò','/ə bʌntʃ əv ˌkɔriˈændər/','Coriander (UK) is cilantro (US).','',''),
+ C('ing','a head of lettuce','một cây xà lách','/ə hɛd əv ˈlɛtɪs/','Lettuce is uncountable: a head or a leaf of lettuce.','',''),
+ C('ing','a cucumber, thinly sliced','một quả dưa leo, thái mỏng','/ə ˈkjuˌkʌmbər ˈθɪnli slaɪst/','Thinly sliced = in thin, flat pieces.','',''),
+ C('ing','a carrot, cut into thin strips','một củ cà rốt, cắt sợi mỏng','/ə ˈkærət kʌt ˈɪntu θɪn strɪps/','Carrot is countable: a carrot, two carrots.','',''),
+ C('verb','boil the shrimp until pink','luộc tôm đến khi chuyển màu hồng','/bɔɪl ðə ʃrɪmp ənˈtɪl pɪŋk/','until + a sign that shows when to stop','',''),
+ C('ing','10 sheets of rice paper','10 tờ bánh tráng','/tɛn ʃits əv raɪs ˈpeɪpər/','Rice paper is uncountable: use a sheet.','',''),
+ C('verb','dip the rice paper in warm water','nhúng bánh tráng vào nước ấm','/dɪp ðə raɪs ˈpeɪpər ɪn wɔrm ˈwɔtər/','Dip for one second only: it gets soft very fast.','',''),
+ C('verb','lay it flat on a plate','trải phẳng lên đĩa','/leɪ ɪt flæt ɑn ə pleɪt/','Lay = put something down flat.','',''),
+ C('verb','put the filling in the middle','cho nhân vào giữa','/pʊt ðə ˈfɪlɪŋ ɪn ðə ˈmɪdəl/','Filling = the food inside the roll.','',''),
+ C('verb','fold in the sides','gấp hai mép vào','/foʊld ɪn ðə saɪdz/','Fold = bend something over.','',''),
+ C('verb','roll it tightly','cuộn chặt','/roʊl ɪt ˈtaɪtli/','Tightly = with no space inside.','',''),
+ C('verb','cut in half','cắt đôi','/kʌt ɪn hæf/','Half = one of two equal parts.','',''),
+ C('verb','serve with dipping sauce','dọn kèm nước chấm','/sɜrv wɪð ˈdɪpɪŋ sɔs/','Serve = put food on the table.','','')
 ];
 const STAGES=[
- {n:'Kitchen basics',l:['turn on the stove','fry in a pan','put on a plate','crack an egg','heat the oil over medium heat','stir well','a pinch of salt']},
- {n:'Seasoning & sauce',l:['a tablespoon of sugar','2 tablespoons of fish sauce','2 cloves of garlic','mix the dipping sauce']},
- {n:'The filling',l:['200 grams of minced pork','50 grams of glass noodles','2 shallots, finely chopped','mince the garlic','chop the onion','soak in warm water','cut into small pieces']},
- {n:'Wrap, fry & serve',l:['10 sheets of rice paper','put a spoonful of filling','fold in the sides','roll it tightly','fry until golden brown','drain on a paper towel','serve with fish sauce']}
+ {n:'Kitchen basics',l:['turn on the stove','boil in a pot','fry in a pan','crack an egg','heat the oil over medium heat','stir well','a pinch of salt','put on a plate']},
+ {n:'Seasoning & sauce',l:['a tablespoon of sugar','2 tablespoons of fish sauce','2 cloves of garlic','mix the dipping sauce','a handful of crushed peanuts']},
+ {n:'Fresh spring roll filling',l:['10 shrimp, peeled','100 grams of boiled pork belly','50 grams of vermicelli','a bunch of fresh mint','a bunch of coriander','a head of lettuce','a cucumber, thinly sliced','a carrot, cut into thin strips','boil the shrimp until pink']},
+ {n:'Wrap, cut & serve',l:['10 sheets of rice paper','dip the rice paper in warm water','lay it flat on a plate','put the filling in the middle','fold in the sides','roll it tightly','cut in half','serve with dipping sauce']}
 ];
+
 (function(){const src=CARDS.slice(),out=[];
  STAGES.forEach((st,si)=>st.l.forEach(en=>{const c=src.find(x=>x.en===en);if(!c)throw new Error('missing card '+en);c.s=si;out.push(c);}));
- if(out.length!==src.length)throw new Error('card order mismatch '+out.length+'/'+src.length);
+ if(out.length!==src.length)throw new Error('card order mismatch');
  CARDS.length=0;out.forEach((c,i)=>{c.k='c'+i;CARDS.push(c);});})();
 
 const SEQ=[
@@ -299,15 +305,15 @@ const EGG_FULL="First, crack two eggs into a small bowl. Next, add a pinch of sa
 
 const WMIN=100,WMAX=320;
 const MODEL=[
- "Hello everyone! Today I'm going to show you how to make fried spring rolls, a famous Vietnamese dish. They are easy to make and very healthy because they have a lot of fresh vegetables. For this recipe, we need ten sheets of rice paper, fifty grams of glass noodles, two hundred grams of minced pork, two cloves of garlic, two shallots, half an onion, a pinch of salt, a tablespoon of sugar and a pinch of black pepper. We also need a bowl, a cutting board, a knife, a pan and a pair of chopsticks.",
- "First, soak the glass noodles in warm water until they are soft, then cut them into small pieces. Next, chop the onion and the shallots on the cutting board and mince the garlic. Then, mix the pork, noodles, onion, shallots and garlic in a big bowl. Add the salt, sugar and pepper and stir well. Once the filling is ready, put a spoonful of filling on a sheet of rice paper, fold in the sides and roll it tightly. Meanwhile, heat some oil in a pan over medium heat. As soon as the oil is hot, fry the rolls until they turn golden brown. Finally, drain the rolls on a paper towel and put them on a plate. The tip to make it delicious is to dip the rice paper in warm water for only one second. Be careful not to soak it for too long, or it will break.",
- "Now the food is ready to be served. Eat the rolls with lettuce, coriander and fish sauce. I hope you can make it. Enjoy! Thank you for watching, see you in the next video."
+ "Hello everyone! Today I'm going to show you how to make fresh spring rolls, a famous Vietnamese dish. They are easy to make and very healthy because they have a lot of fresh vegetables. For this recipe, we need ten sheets of rice paper, ten shrimp, a hundred grams of boiled pork belly, fifty grams of vermicelli, a head of lettuce, a bunch of fresh mint, a cucumber and a carrot. We also need a pot, a bowl and a plate.",
+ "First, boil the shrimp in a pot until they turn pink, then peel them and cut them in half. Next, slice the cucumber and the carrot into thin strips. Meanwhile, boil the vermicelli and drain it. Once everything is ready, dip a sheet of rice paper in warm water for one second and lay it flat on a plate. Put the lettuce, mint, vermicelli, pork and vegetables in the middle. Then, place the shrimp on the rice paper, fold in the sides and roll it tightly. The tip to make it delicious is to roll it tightly, so it does not fall apart. Finally, mix the dipping sauce with fish sauce, sugar, garlic and lime juice.",
+ "Now the spring rolls are ready to be served. Eat them with the dipping sauce. I hope you can make it. Enjoy! Thank you for watching, see you in the next video."
 ];
 /* ===== LESSON DATA END ===== */
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const KEY='cook2:'+LESSON+':';
+const KEY='cook3:'+LESSON+':';
 function load(k,d){try{const v=localStorage.getItem(KEY+k);return v==null?d:JSON.parse(v);}catch(e){return d;}}
 function store(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v));}catch(e){}}
 const ST=Object.assign({opened:[],checks:[],q:{},egg:null,eggMine:'',script:['','',''],draft1:null,submitted:null,attempts:0,fbCount:0,seqSeen:false},load('st',{}));
@@ -567,22 +573,9 @@ const VERBRE=/\b(stir|add|pour|squeeze|mince|chop|slice|wrap|roll|heat|cut|fry|m
 const QTYRE=/\b(pinch|cloves?|sheets?|bunch|head|tablespoons?|teaspoons?|grams?|handful|spoonful|cup)\s+of\b/gi;
 const scParts=()=>ST.script.map(s=>s.trim());
 const scText=()=>scParts().join('\n').trim();
-$$('textarea[data-s]').forEach(t=>{t.value=ST.script[+t.dataset.s]||'';t.oninput=()=>{ST.script[+t.dataset.s]=t.value;save();scUpd();};});
-function goals(parts){
-  const T=parts.join('\n'),verbs=new Set((T.match(VERBRE)||[]).map(x=>x.toLowerCase())),su=seqUsed(T),q=(T.match(QTYRE)||[]).length,n=wc(T);
-  return [
-   ['Opening: greet your viewers and say what you will show (Hello everyone! Today …)',/(hello|hi)\b[^.!?]*\b(everyone|everybody|guys|friends)/i.test(parts[0])&&/today/i.test(parts[0])&&/spring rolls?/i.test(parts[0])],
-   ['Use at least 4 quantity phrases (a pinch of, 2 cloves of, 10 sheets of …): '+q+'/4',q>=4],
-   ['Use at least 4 different sequence words: '+su.length+'/4',su.length>=4],
-   ['Use at least 5 different cooking verbs: '+verbs.size+'/5',verbs.size>=5],
-   ['Give a tip (The tip … is to / Make sure / Be careful not to)',/(the tip|the secret|make sure|be careful)/i.test(T)],
-   ['Ending: thank your viewers (Thank you for watching)',/(thank you for watching|thanks for watching|see you)/i.test(parts[2])],
-   ['Write '+WMIN+'–'+WMAX+' words ('+n+')',n>=WMIN&&n<=WMAX]
-  ];
-}
+$$('textarea[data-s]').forEach(t=>{t.value=ST.script[+t.dataset.s]||'';t.oninput=()=>{ST.script[+t.dataset.s]=t.value;save();scUpd();clearTimeout(window._rd);window._rd=setTimeout(()=>{if(typeof drawRead==='function')drawRead();},400);};});
 function scUpd(){
-  $('#scCount').innerHTML=`<b>${wc(scText())}</b> words (aim for ${WMIN}–${WMAX})`;
-  $('#scCheck').innerHTML=goals(scParts()).map(([t,ok])=>`<li>${ok?'✅':'⬜'} ${esc(t)}</li>`).join('');
+  $('#scCount').innerHTML=`<b>${wc(scText())}</b> words`;
 }
 $('#scModel').onclick=()=>{const b=$('#scModelBox');b.hidden=false;b.innerHTML='<b>Model text</b><br><br>'+MODEL.map(esc).join('<br><br>');};
 scUpd();
@@ -637,12 +630,10 @@ function analyze(parts){
   return issues;
 }
 function renderFeedback(parts){
-  const iss=analyze(parts),g=goals(parts),box=$('#fbBox');box.hidden=false;
-  const missing=g.filter(x=>!x[1]);
+  const iss=analyze(parts),box=$('#fbBox');box.hidden=false;
   let h='';
   h+=iss.length?`<h3>Language tips (${iss.length})</h3>`+iss.map(i=>`<div class="issue"><b>${i.part}:</b> <q>${esc(i.s.length>90?i.s.slice(0,90)+'…':i.s)}</q><br>${esc(i.msg)}</div>`).join(''):`<div class="okbox">✅ No language problems found. Good job!</div>`;
-  h+=missing.length?`<h3>Goals to improve</h3>`+missing.map(x=>`<div class="issue" style="border-color:#E0A800;background:#fffaf0">${esc(x[0])}</div>`).join(''):`<div class="okbox">✅ You reached all the goals.</div>`;
-  h+=`<p class="hint">Change your text and press “Submit for feedback” again, or go on to read and record.</p>`;
+  h+=`<p class="hint">Change your text and press “Submit for feedback” again, or go on to Step 2 and Step 3 (read and record).</p>`;
   box.innerHTML=h;return iss.length;
 }
 $('#scSubmit').onclick=()=>{
@@ -654,10 +645,11 @@ $('#scSubmit').onclick=()=>{
   $('#scModel').hidden=false;unlockPractice();
   $('#fbBox').scrollIntoView({behavior:'smooth',block:'nearest'});
 };
-function unlockPractice(){if(!ST.submitted)return;$('#readCard').hidden=false;$('#recCard').hidden=false;drawRead();}
+function unlockPractice(){drawRead();}
+const pText=()=>scParts().join('\n');
 let readSents=[];
 function drawRead(){
-  readSents=sents(ST.submitted.join('\n'));
+  readSents=sents(pText());
   const box=$('#readBox');box.innerHTML='';
   readSents.forEach((s,i)=>{
     const d=document.createElement('div');d.className='sent';d.id='rs'+i;
@@ -681,7 +673,8 @@ function recUI(state){
   $('#recPause').textContent=state==='paused'?'▶ Resume':'⏸ Pause';
 }
 $('#recStart').onclick=async()=>{
-  if(!ST.submitted){toast('Submit your text for feedback first.');return;}
+  if(wc(pText())<5){toast('Write your text first (Step 1).');return;}
+  drawRead();
   if(!navigator.mediaDevices||!window.MediaRecorder){toast('This browser cannot record. Please use Chrome or Safari.',5000);return;}
   stopSpeech();
   try{
@@ -692,7 +685,7 @@ $('#recStart').onclick=async()=>{
       rstream.getTracks().forEach(t=>t.stop());clearInterval(rtick);try{sr&&sr.stop();}catch(e){}
       rec.mime=(mr.mimeType||'audio/webm').split(';')[0];rec.blob=new Blob(chunks,{type:rec.mime});rec.dur=rElapsed();rec.sent=false;
       $('#recAudio').src=URL.createObjectURL(rec.blob);$('#recOut').hidden=false;$('#recMsg').textContent='';$('#recTime').textContent='Recorded '+rec.dur+' seconds';recUI('idle');
-      setTimeout(()=>{if(rec.transcript){rec.score=cmp(ST.submitted.join(' ').replace(/\s+/g,' '),rec.transcript).score;$('#recScore').textContent='The computer heard about '+rec.score+'% of your text. Listen to the model and try again if you want to improve.';}else{rec.score=null;$('#recScore').textContent='';}},400);
+      setTimeout(()=>{if(rec.transcript){rec.score=cmp(pText().replace(/\s+/g,' '),rec.transcript).score;$('#recScore').textContent='The computer heard about '+rec.score+'% of your text. Listen to the model and try again if you want to improve.';}else{rec.score=null;$('#recScore').textContent='';}},400);
     };
     rt0=Date.now();mr.start();recUI('rec');
     rtick=setInterval(()=>{if(mr.state==='recording'){const s=rElapsed();$('#recTime').textContent='🔴 '+s+' s';if(s>=300)mr.stop();}},500);
@@ -705,7 +698,7 @@ $('#recPause').onclick=()=>{
   else if(mr.state==='paused'){mr.resume();rpaused+=Date.now()-rpauseAt;recUI('rec');if(SRC&&sr){try{sr.start();}catch(e){}}}
 };
 $('#recStop').onclick=()=>{if(mr&&mr.state!=='inactive'){if(mr.state==='paused'){rpaused+=Date.now()-rpauseAt;}mr.stop();}};
-$('#modelPlay').onclick=()=>playList(readSents,+$('#rate').value,null,null);
+$('#modelPlay').onclick=()=>{drawRead();playList(readSents,+$('#rate').value,null,null);};
 $('#modelStop').onclick=()=>stopSpeech();
 function b64(blob){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(blob);});}
 async function postJSON(obj){
@@ -729,7 +722,7 @@ $('#recSend').onclick=async()=>{
   const ext=rec.mime.includes('mp4')?'m4a':rec.mime.includes('ogg')?'ogg':'webm';
   for(let k=0;k<3;k++){
     try{
-      await postJSON({type:'audio',name,lesson:LESSON,file:'DocTo_01_SpringRoll.'+ext,mime:rec.mime,label:'Read aloud: how to make spring rolls',target:ST.submitted.join('\n'),transcript:rec.transcript,score:rec.score,dur:rec.dur,audio:await b64(rec.blob)});
+      await postJSON({type:'audio',name,lesson:LESSON,file:'DocTo_01_SpringRoll.'+ext,mime:rec.mime,label:'Read aloud: how to make spring rolls',target:pText(),transcript:rec.transcript,score:rec.score,dur:rec.dur,audio:await b64(rec.blob)});
       rec.sent=true;$('#recMsg').textContent='✅ Sent to your teacher';btn.disabled=false;return;
     }catch(e){await new Promise(r=>setTimeout(r,1500*(k+1)));}
   }
@@ -756,7 +749,7 @@ function buildSummary(){
   if(ST.egg)details.push({part:'Fried egg order',question:'Order 8 steps',answer:ST.egg.first+'/8 in the right place (first try)',correct:'8/8',result:ST.egg.ok?'Correct':'Wrong'});
   if(ST.eggMine.trim())details.push({part:'Fried egg: own text',question:'Write how to fry an egg',answer:ST.eggMine.trim(),correct:'(teacher checks)',result:wc(ST.eggMine)+' words; '+seqUsed(ST.eggMine).length+' sequence words'});
   if(ST.draft1)details.push({part:'Spring roll text: first draft',question:'Opening / Body / Ending',answer:ST.draft1.join('\n\n'),correct:'(teacher checks)',result:wc(ST.draft1.join(' '))+' words'});
-  if(scText())details.push({part:'Spring roll text: final',question:'Opening / Body / Ending',answer:scParts().join('\n\n'),correct:'(teacher checks)',result:wc(scText())+' words; feedback '+ST.attempts+'×; last tips '+ST.fbCount+'; goals '+goals(scParts()).filter(x=>x[1]).length+'/7'});
+  if(scText())details.push({part:'Spring roll text: final',question:'Opening / Body / Ending',answer:scParts().join('\n\n'),correct:'(teacher checks)',result:wc(scText())+' words; feedback '+ST.attempts+'×; last tips '+ST.fbCount+''});
   return {summary:{recordings:rec.sent?1:0,avg:rec.score,
     full:'Recording: '+(rec.sent?'sent':'not sent'),
     writes:'Spring roll text '+wc(scText())+' words · feedback '+ST.attempts+'× · egg text '+wc(ST.eggMine)+' words',
@@ -780,6 +773,7 @@ $('#stuName').oninput=e=>store('name',e.target.value);
 })();
 
 nextCard();eggInit();applyLocks();
+drawRead();
 if(ST.submitted){$('#scAtt').textContent='Feedback given '+ST.attempts+' time'+(ST.attempts>1?'s':'');$('#scModel').hidden=false;unlockPractice();}
 </script>
 </body>
